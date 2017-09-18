@@ -32,9 +32,13 @@ public class LandingController extends HttpServlet{
     protected void doPost(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException {
         
         /**
-         * In this case. we return the HTML in landing.html in a http response to the clients browser. This is taken care of behind the scenes.
+         * In this case. we return the HTML in landing.jsp  in a http response to the clients browser. This is taken care of behind the scenes.
          */
-        RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/" + "landing.html");
+        
+        /**
+         * NOTE: jsp files are simply html files with functionality to directly access attributes (values) stored with the response object in this method.
+         */
+        RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/" + "landing.jsp");
         /**
          * The default file directory root is WebContent/
          */
