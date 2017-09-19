@@ -73,7 +73,7 @@
                 </tr>
                 
               </thead>
-              <tbody>
+              <tbody>	<!--  Our sector query data will be displayed here, thoughts? 	-->
               <tr>
                  <td class="text-success">Technology 9.8%</td>
               </tr>
@@ -96,7 +96,7 @@
         <div class="col-sm-6 col-sm-offset-3 col-md-8 col-md-offset-1 main"  style=" margin-top: 40px;">
           <div class="jumbotron" style=" margin-top: 40px;">
 			  <h2>Welcome to StockApp</h2>
-			  <p>The best S&amp;P 500 Stock Application ever designed. Search your favourite stocks by market code and customise search results for a variety of indices and performace indicators.</p>
+			  <p>The best S&amp;P 500 Stock Application ever designed. Search your favourite stocks by market code and customise search results for a variety of indices and performance indicators.</p>
 		  <form class="navbar-form navbar-right">
             <input type="text" class="form-control" placeholder="Start Searching">
             <button type="submit" class="btn btn-default">Submit</button>
