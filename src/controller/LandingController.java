@@ -29,7 +29,7 @@ public class LandingController extends HttpServlet{
      * Parameters:  <code>HttpServletRequest request</code>, <code>HttpServletResponse response</code>
      */
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         
         /**
          * In this case. we return the HTML in landing.jsp  in a http response to the clients browser. This is taken care of behind the scenes.
@@ -49,7 +49,7 @@ public class LandingController extends HttpServlet{
      * doGet method handles HTTP GET requests to the / and /home URLs.
      */
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         
         /**
          * In this case, we simply handle the request the same way as a POST i.e returning the html in landing.html
