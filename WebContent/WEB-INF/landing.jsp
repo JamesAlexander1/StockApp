@@ -74,6 +74,13 @@
                 
               </thead>
               <tbody>	<!--  Our sector query data will be displayed here, thoughts? 	-->
+              
+			<c:forEach items="${sector_list}" var="element">    
+				<tr>
+   				<td class="text-success"><c:out value="${element.name}"/> : <c:out value="${element.value}"/></td>
+   				</tr>
+			</c:forEach>
+			<!-- 
               <tr>
                  <td class="text-success">Technology 9.8%</td>
               </tr>
@@ -88,7 +95,7 @@
               </tr>
               <tr>
                  <td class="text-danger">Utilities -4.0%</td>
-              </tr>
+              </tr> -->
               </tbody>
             </table>
             </div>

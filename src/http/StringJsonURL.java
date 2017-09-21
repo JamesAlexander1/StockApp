@@ -13,10 +13,22 @@ import java.net.URL;
  */
 public class StringJsonURL implements StringURL{
 
+    /**
+     * 
+     */
     String apiURL;
+    
+    
+    /**
+     * 
+     * @param url
+     */
     public StringJsonURL(String url){
+        
         apiURL = url;
     }
+    
+    
     /**
      * 
      */
@@ -27,17 +39,19 @@ public class StringJsonURL implements StringURL{
         URL webUrl = null;
         String json = null;
         
-        try{
+        try{                                //
             
             webUrl = new URL(apiURL);
             inputStream = new BufferedReader(new InputStreamReader(webUrl.openStream()));
             json = getStringFromResponse(inputStream);
         
         
-        } catch (IOException e) {
+        } catch (IOException e) {           //
             
             e.printStackTrace();
-        }finally{
+            
+            
+        }finally{                           //
             
            if(inputStream != null){
                
@@ -51,8 +65,9 @@ public class StringJsonURL implements StringURL{
            }
         }
         
-        return json;
+        return json;                        //
     }
+    
     
     /**
      * 
@@ -64,16 +79,17 @@ public class StringJsonURL implements StringURL{
         
         StringBuilder builder = new StringBuilder();
         String line;
-        try {
+        
+        try {                               //
             while((line = inputStream.readLine()) != null){
                 builder.append(line);
             }
-        } catch (IOException e) {
+        } catch (IOException e) {           //
             
             e.printStackTrace();
         }
         
-        return builder.toString();
+        return builder.toString();          //
     }
 
 }
