@@ -77,7 +77,16 @@
               
 			<c:forEach items="${sector_list}" var="element">    
 				<tr>
-   				<td class="text-success"><c:out value="${element.name}"/> : <c:out value="${element.value}"/></td>
+				
+				<c:choose>
+					<c:when test="${element.value <= '0'}">
+						<td class="text-danger"><c:out value="${element.name}"/> : <c:out value="${element.value}"/></td>
+					</c:when>
+					<c:otherwise>
+						<td class="text-success"><c:out value="${element.name}"/> : <c:out value="${element.value}"/></td>
+					</c:otherwise>
+				</c:choose>
+
    				</tr>
 			</c:forEach>
 			<!-- 
