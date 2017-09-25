@@ -12,7 +12,7 @@
 
 	<meta charset="UTF-8">
 	
-	<title>Hello</title>
+	<title>StockApp</title>
 	<!-- HTML for web page -->
 	<!--  If we want to include javascript, we would store it in a .js file under WEB-INF and would reference it with a <script> tag
 	and call the js functions/code as needed in this html file  -->
@@ -29,6 +29,43 @@
 	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 	
 </head>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+    google.charts.load('current', {'packages':['line']});
+    google.charts.setOnLoadCallback(drawChart);
+
+  function drawChart() {
+
+    var data = new google.visualization.DataTable();
+    data.addColumn('date', 'Date');
+    data.addColumn('number', 'Price');
+    
+    <c:forEach items="${chart_data}" var="chartData">
+    	data.addRow([new Date(${chartData.year}, ${chartData.month}, ${chartData.day}), ${chartData.value}]);
+    </c:forEach>
+				
+
+    var options = {
+      title: 'Microsoft Price Chart',
+      titleTextStyle: {color: '#FFF'},
+      legend : {position:'none'},
+      backgroundColor: '#fcfcfc',
+      hAxis: {textStyle:{color: '#FFF'}},
+      vAxis: {
+    	  textStyle:{color: '#FFF'},
+    	  baselineColor: '#fff',
+    	  gridlineColor: '#fff'
+      },
+	  backgroundColor:'#272626',
+      width: 700,
+      height: 500
+    };
+
+    var chart = new google.charts.Line(document.getElementById('linechart_material'));
+
+    chart.draw(data, google.charts.Line.convertOptions(options));
+  }
+    </script>
 <body>
 	
 	<nav class="navbar navbar-default navbar-fixed-top" style=" margin-bottom: 40px;">
@@ -49,7 +86,7 @@
           </ul>
           <form class="navbar-form navbar-left">
             <input type="text" class="form-control" placeholder="Search...">
-            <button type="submit" class="btn btn-default">Submit</button>
+			<a class="btn btn-default" href="chart.jsp">Submit</a>
           </form>
           
         </div>
@@ -74,6 +111,36 @@
                 
               </thead>
               <tbody>	<!--  Our sector query data will be displayed here, thoughts? 	-->
+              
+			<c:forEach items="${sector_list}" var="element">    
+				<tr>
+				
+				<c:choose>
+					<c:when test="${element.value <= '0'}">
+						<td class="text-danger"><c:out value="${element.name}"/> : <c:out value="${element.value}"/></td>
+					</c:when>
+					<c:otherwise>
+						<td class="text-success"><c:out value="${element.name}"/> : <c:out value="${element.value}"/></td>
+					</c:otherwise>
+				</c:choose>
+
+   				</tr>
+   	
+			   				
+			</c:forEach>
+				<!--<c:forEach items="${chart_data}" var="chartData">    
+				<tr>
+				<c:forEach items="${chart_data}" var="chartData">
+        data.addRow(${chartData.date}, ${chartData.value});
+        </c:forEach>
+					
+						<c:out value="${chartData.date}"/>
+						<c:out value="${chartData.value}"/>
+
+   				</tr>
+			</c:forEach>-->
+			
+			<!-- 
               <tr>
                  <td class="text-success">Technology 9.8%</td>
               </tr>
@@ -88,24 +155,17 @@
               </tr>
               <tr>
                  <td class="text-danger">Utilities -4.0%</td>
-              </tr>
+              </tr> -->
               </tbody>
             </table>
             </div>
         </div>
-        <div class="col-sm-6 col-sm-offset-3 col-md-8 col-md-offset-1 main"  style=" margin-top: 40px;">
-          <div class="jumbotron" style=" margin-top: 40px;">
-			  <h2>Welcome to StockApp</h2>
-			  <p>The best S&amp;P 500 Stock Application ever designed. Search your favourite stocks by market code and customise search results for a variety of indices and performance indicators.</p>
-		  
-          
-			 
-		  </div>
-
-          
+        <div class = "col-sm-6 col-sm-offset-3 col-md-8 col-md-offset-1 main" style=" margin-top: 40px;">
+        	<div class="jumbotron" style="margin-top: 20px;">
+        	<h2 style = "text-align: center;">Price Chart</h2>
+   				 <div align="center" id="linechart_material" style="width: 900px; height: 500px; left: 0; right:0; margin: auto"></div>
+        	</div>
         </div>
-      </div>
-    </div>
 </body>
  <script src="${pageContext.request.contextPath}/bootstrap/js/bootstrap.min.js"></script>
 </html>
