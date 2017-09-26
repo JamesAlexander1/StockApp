@@ -1,5 +1,11 @@
 package model;
 
+/**
+ * Sector class modeling a stock sector with a name (e.g utilities) and a value stored as a double, usually used to describe
+ * either a percentage or price. Implements Comparable so as to enable sorting on a Collection of Sector objects.
+ * @author James Alexander
+ *
+ */
 public class Sector implements Comparable<Sector>{
 
     private String name;
@@ -7,8 +13,8 @@ public class Sector implements Comparable<Sector>{
     
     /**
      * 
-     * @param nameInput
-     * @param valueInput
+     * @param nameInput     - name of object as a String
+     * @param valueInput    - value of object as a Double (not a double primitive !)
      */
     public Sector(String nameInput, Double valueInput){
         
@@ -17,16 +23,16 @@ public class Sector implements Comparable<Sector>{
     }
     
     /**
-     * 
-     * @return
+     * Getter function for String name.
+     * @return  String name
      */
     public String getName() {
         return name;
     }
 
     /**
-     * 
-     * @param name
+     * Setter function for String name.
+     * @param name  -   name of object as a String
      */
     public void setName(String name) {
         this.name = name;
@@ -34,16 +40,16 @@ public class Sector implements Comparable<Sector>{
 
     
     /**
-     * 
-     * @return
+     * Getter function for Double value.
+     * @return  Double value
      */
     public Double getValue() {
         return value;
     }
 
     /**
-     * 
-     * @param value
+     * Setter function for Double value
+     * @param value -   value of object as a Double
      */
     public void setValue(Double value) {
         this.value = value;

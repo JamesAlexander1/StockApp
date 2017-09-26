@@ -7,21 +7,19 @@ import java.net.URL;
 
 
 /**
- * 
- * @author james
+ * Retrieve JSON from HTTP call.
+ * @author James Alexander
  *
  */
 public class StringJsonURL implements StringURL{
 
-    /**
-     * 
-     */
-    String apiURL;
+    
+    private String apiURL;                  //URL for AlphaVantage API.
     
     
     /**
-     * 
-     * @param url
+     * Constructor.
+     * @param url   -   URL for HTTP request.
      */
     public StringJsonURL(String url){
         
@@ -30,7 +28,7 @@ public class StringJsonURL implements StringURL{
     
     
     /**
-     * 
+     * Get JSON String from HTTP call.
      */
     @Override
     public String getResponse() {
@@ -39,24 +37,25 @@ public class StringJsonURL implements StringURL{
         URL webUrl = null;
         String json = null;
         
-        try{                                //
+        try{                                //Query URL for HTTP response.
             
             webUrl = new URL(apiURL);
             inputStream = new BufferedReader(new InputStreamReader(webUrl.openStream()));
             json = getStringFromResponse(inputStream);
         
         
-        } catch (IOException e) {           //
+        } catch (IOException e) {           
             
             e.printStackTrace();
             
             
-        }finally{                           //
+        }finally{                           //Close HTTP Connections.
             
            if(inputStream != null){
                
                try {
                    inputStream.close();
+                   
                 
                } catch (IOException e) {
                 
@@ -65,14 +64,14 @@ public class StringJsonURL implements StringURL{
            }
         }
         
-        return json;                        //
+        return json;                        
     }
     
     
     /**
-     * 
-     * @param inputStream
-     * @return
+     * Read HTTP response body as a single String object.
+     * @param inputStream   - InputStream object to read from.
+     * @return String of HTTP response body.
      */
     private String getStringFromResponse(BufferedReader inputStream){
         
@@ -80,16 +79,16 @@ public class StringJsonURL implements StringURL{
         StringBuilder builder = new StringBuilder();
         String line;
         
-        try {                               //
+        try {                               //read all lines from HTTP response body.
             while((line = inputStream.readLine()) != null){
                 builder.append(line);
             }
-        } catch (IOException e) {           //
+        } catch (IOException e) {           //Catch some exceptions (add loging!)
             
             e.printStackTrace();
         }
         
-        return builder.toString();          //
+        return builder.toString();          //return as single String object.
     }
 
 }

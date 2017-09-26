@@ -2,15 +2,14 @@ package http;
 
 /**
  * 
- * @author james
+ * @author James Alexander
  *
  */
 public interface StringURL {
 
     /**
-     * 
-     * @param url
-     * @return
+     * Retrieve response from AlphaVantage API call.
+     * @return HTTP response as a String.
      */
     String getResponse();
 }
