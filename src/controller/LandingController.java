@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import dao.SectorPerformDAO;
+
 
 /**
  * LandingController extends the HttpServlet class and implements the Controller pattern as part of MVC.
@@ -19,6 +21,7 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet({"/home", ""})
 public class LandingController extends HttpServlet{
 
+    private static SectorPerformDAO dao = new SectorPerformDAO("https://www.alphavantage.co/query?function=SECTOR&apikey=CR72JXL4TE7T2WF4");
     /**
      * 
      */
@@ -30,6 +33,12 @@ public class LandingController extends HttpServlet{
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        
+        /**
+         * Adding query results as attribute, to be placed in html as part of jsp file.
+         */
+        request.setAttribute("sector_list", dao.sectorQuery());
+        
         
         /**
          * In this case. we return the HTML in landing.jsp  in a http response to the clients browser. This is taken care of behind the scenes.

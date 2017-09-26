@@ -73,22 +73,24 @@
                 </tr>
                 
               </thead>
-              <tbody>	<!--  Our sector query data will be displayed here, thoughts? 	-->
-              <tr>
-                 <td class="text-success">Technology 9.8%</td>
-              </tr>
-              <tr>
-                 <td class="text-success">Energy 5.1%</td>
-              </tr>
-              <tr>
-                 <td class="text-success" >Consumer Goods 1.6%</td>
-              </tr>
-              <tr>
-                 <td class="text-danger">Real Estate -3.2%</td>
-              </tr>
-              <tr>
-                 <td class="text-danger">Utilities -4.0%</td>
-              </tr>
+              <tbody>	<!--  Our sector query data will be displayed here	-->
+             
+             <!-- Loop through each sector object, display name and yesterday's performance as a percentage increase or decrease on closing price --> 
+			<c:forEach items="${sector_list}" var="element">    
+				<tr>
+				
+				<c:choose>
+					<c:when test="${element.value <= '0'}">
+						<td class="text-danger"><c:out value="${element.name}"/> : <c:out value="${element.value}"/></td>
+					</c:when>
+					<c:otherwise>
+						<td class="text-success"><c:out value="${element.name}"/> : <c:out value="${element.value}"/></td>
+					</c:otherwise>
+				</c:choose>
+
+   				</tr>
+			</c:forEach>
+			
               </tbody>
             </table>
             </div>
