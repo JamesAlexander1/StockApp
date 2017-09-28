@@ -74,7 +74,38 @@
                 
               </thead>
               <tbody>	<!--  Our sector query data will be displayed here	-->
-             
+             <!-- <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+    google.charts.load('current', {'packages':['line']});
+    google.charts.setOnLoadCallback(drawChart);
+  function drawChart() {
+    var data = new google.visualization.DataTable();
+    data.addColumn('date', 'Date');
+    data.addColumn('number', 'Price');
+    
+    <c:forEach items="${chart_data}" var="chartData">
+    	data.addRow([new Date(${chartData.year}, ${chartData.month}, ${chartData.day}), ${chartData.value}]);
+    </c:forEach>
+				
+    var options = {
+      title: 'Microsoft Price Chart',
+      titleTextStyle: {color: '#FFF'},
+      legend : {position:'none'},
+      backgroundColor: '#fcfcfc',
+      hAxis: {textStyle:{color: '#FFF'}},
+      vAxis: {
+    	  textStyle:{color: '#FFF'},
+    	  baselineColor: '#fff',
+    	  gridlineColor: '#fff'
+      },
+	  backgroundColor:'#272626',
+      width: 700,
+      height: 500
+    };
+    var chart = new google.charts.Line(document.getElementById('linechart_material'));
+    chart.draw(data, google.charts.Line.convertOptions(options));
+  }
+    </script> -->
              <!-- Loop through each sector object, display name and yesterday's performance as a percentage increase or decrease on closing price --> 
 			<c:forEach items="${sector_list}" var="element">    
 				<tr>
