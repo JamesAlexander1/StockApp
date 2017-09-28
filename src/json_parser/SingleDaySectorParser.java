@@ -46,6 +46,7 @@ public abstract class SingleDaySectorParser {
         
         try{
             JsonObject oneDayObject = element.getAsJsonObject();
+           
             oneDayObject = oneDayObject.getAsJsonObject("Rank B: 1 Day Performance");               //retrieve yesterdays performance attributes as a JSON object.
             
             Set<Map.Entry<String,JsonElement>> set = oneDayObject.entrySet();                       //convert into set of individual key,value pairs.
