@@ -5,7 +5,6 @@ import model.DatePricePoint;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.Iterator;
-import java.util.Map;
 import java.util.Map.Entry;
 
 
@@ -37,10 +36,10 @@ public abstract class WeeklyClosingPriceParser {
             String[] timeAsString = entry.getKey().split("-");
             Integer[] time = new Integer[3];
             for(int i = 0; i < 3; i++){
-                //System.out.println(Integer.parseInt(timeAsString[0]) + timeAsString[1] + timeAsString[2]);
+              
                 time[i] = Integer.parseInt(timeAsString[i]);
             }
-            //System.out.println(entry.getValue().getAsJsonObject().get("4. close").toString());
+            
             list.add(new DateClosingPricePoint(new GregorianCalendar(time[0], time[1], time[2]), entry.getValue().getAsJsonObject().get("4. close").getAsDouble()));
             temp ++;
         }
