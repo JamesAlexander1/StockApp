@@ -13,6 +13,7 @@ public class DateClosingPricePoint implements DatePricePoint<DateClosingPricePoi
         
         shortDate = newDate;
         price = newPrice;
+        
     }
     @Override
     public GregorianCalendar getDate() {
@@ -40,6 +41,21 @@ public class DateClosingPricePoint implements DatePricePoint<DateClosingPricePoi
     public int compareTo(DateClosingPricePoint o) {
        
         return o.getDate().get(Calendar.DAY_OF_MONTH) - shortDate.get(Calendar.DAY_OF_MONTH);
+    }
+    
+    @Override
+    public Integer getYear(){
+        return shortDate.get(Calendar.YEAR);
+    }
+    
+    @Override
+    public Integer getMonth(){
+        return shortDate.get(Calendar.MONTH);
+    }
+    
+    @Override
+    public Integer getDay(){
+        return shortDate.get(Calendar.DAY_OF_MONTH);
     }
 
 }

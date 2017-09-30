@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <!-- Used to access jstl language and functionality -->
-
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
 <!-- 
 		Bootstrap CSS used with permission from Bootstrap.com and Bootswatch.com as per their policies.
  -->
@@ -16,20 +16,22 @@
 	<!-- HTML for web page -->
 	<!--  If we want to include javascript, we would store it in a .js file under WEB-INF and would reference it with a <script> tag
 	and call the js functions/code as needed in this html file  -->
-	 <link href="${pageContext.request.contextPath}/bootstrap/css/darkly_bootstrap.min.css" rel="stylesheet" type="text/css" />
-	 <link href="${pageContext.request.contextPath}/bootstrap/css/custom.css" rel="stylesheet" type="text/css" />
+	
 	
 	<!-- ${pageContext.request.contextPath} is a jstl variable, jstl is a scripting language for access servlet variables for use 
 	in jsp files. in this case, we are retrieving the root of the directory for all pages (WebContent/) -->
-	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
-	
+	 <link href="${pageContext.request.contextPath}/bootstrap/css/darkly_bootstrap.min.css" rel="stylesheet" type="text/css" />
+	 <link href="${pageContext.request.contextPath}/bootstrap/css/custom.css" rel="stylesheet" type="text/css" />
 	
 	
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <link href="../../assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 	
-	
-	
+
+ 
+
 </head>
 <body>
 	
@@ -49,7 +51,7 @@
             
             <li><a href="#">Help</a></li>
           </ul>
-          <form class="navbar-form navbar-left" method="post" action="search">
+          <form class="navbar-form navbar-left" method="post" action="/search">
             <input type="text" class="form-control" placeholder="Search..." name="search_value">
             <button type="submit" class="btn btn-default">Submit</button>
           </form>
@@ -67,52 +69,56 @@
             <li><a href="#" class="text-info">Analytics</a></li>
             <li><a href="#" class="text-info">Export</a></li>
           </ul>
-          <div class="table-responsive">
-            <table class="table table-striped">
-              <thead>
-                <tr>            
-                  <th>Sectors</th>
-                </tr>
-                
-              </thead>
-              <tbody>	
-             <!-- Loop through each sector object, display name and yesterday's performance as a percentage increase or decrease on closing price --> 
-			<c:forEach items="${sector_list}" var="element">    
-				<tr>
-				
-				<c:choose>
-					<c:when test="${element.value <= '0'}">
-						<td class="text-danger"><c:out value="${element.name}"/> : <c:out value="${element.value}"/></td>
-					</c:when>
-					<c:otherwise>
-						<td class="text-success"><c:out value="${element.name}"/> : <c:out value="${element.value}"/></td>
-					</c:otherwise>
-				</c:choose>
-
-   				</tr>
-			</c:forEach>
-			
-              </tbody>
-            </table>
-            </div>
-        </div>
+         </div>
+          	 
+    
         <div class="col-sm-6 col-sm-offset-3 col-md-8 col-md-offset-1 main"  style=" margin-top: 40px;">
-        
-          <div class="jumbotron" style=" margin-top: 40px;">
-			  <h2>Welcome to StockApp</h2>
-			  <p>The best S&amp;P 500 Stock Application ever designed. Search your favourite stocks by market code and customise search results for a variety of indices and performance indicators.</p>
-		  
-          
-			 ${pageContext.request.contextPath}/bootstrap/css/custom.css
-		  </div> 
-		  <div id=linechart_material>
-		  </div>
-
-          
+          <div style=" margin-top: 40px;" id=linechart_material>
+ 				
+		  </div>   
         </div>
       </div>
     </div>
-    
+   
+    <script>
+    google.charts.load('current', {'packages':['line']});
+    google.charts.setOnLoadCallback(drawChart);
+  	function drawChart() {
+  		
+  	
+	    var data = new google.visualization.DataTable();
+	    data.addColumn('number', 'Date');
+	    data.addColumn('number', 'Price');
+	    
+	    
+	    	
+	    	data.addRow(1, 80.1);
+	    	data.addRow(2, 76.5);
+	    	data.addRow(3, 84.1);
+	   
+					
+	    var options = {
+	      title: 'Test Price Chart',
+	      titleTextStyle: {color: '#FFF'},
+	      legend : {position:'none'},
+	      backgroundColor: '#fcfcfc',
+	      hAxis: {textStyle:{color: '#FFF'}},
+	      vAxis: {
+	    	  textStyle:{color: '#FFF'},
+	    	  baselineColor: '#fff',
+	    	  gridlineColor: '#fff'
+	      },
+		  backgroundColor:'#272626',
+	      width: 300px,
+	      height: 300px
+	    };
+	    var chart = new google.visualization.LineChart(document.getElementById('linechart_material'));
+	    chart.draw(data, google.charts.Line.convertOptions(options));
+  	}
+  	
+</script>
+<script src="${pageContext.request.contextPath}/bootstrap/js/bootstrap.min.js"></script>
 </body>
- <script src="${pageContext.request.contextPath}/bootstrap/js/bootstrap.min.js"></script>
+ 
+ 
 </html>

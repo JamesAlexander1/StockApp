@@ -5,9 +5,13 @@ import java.util.GregorianCalendar;
 
 public interface DatePricePoint<T> extends Comparable<T>{
 
-    GregorianCalendar getDate();
-    void setDate(GregorianCalendar newDate);
+    public GregorianCalendar getDate();
+    public void setDate(GregorianCalendar newDate);
     
-    Double getPrice();
-    void setPrice(Double newPrice);
+    public Double getPrice();
+    public void setPrice(Double newPrice);
+    
+    Integer getYear();
+    Integer getMonth();
+    Integer getDay();
 }
