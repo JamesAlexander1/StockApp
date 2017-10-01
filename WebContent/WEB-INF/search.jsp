@@ -30,7 +30,72 @@
 	
 </head>
 
+<!-- Javascript -->
 
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript">
+    google.charts.load('current', {'packages':['line']});
+    google.charts.setOnLoadCallback(drawChart);
+    function drawChart() {
+        var data = new google.visualization.DataTable();
+        data.addColumn('number', 'Date');
+        data.addColumn('number', 'Price');
+               // <c:forEach items="${chart_data}" var="chartData">
+        //data.addRow([new Date(${chartData.year}, ${chartData.month}, ${chartData.day}), ${chartData.value}]);
+        //</c:forEach>
+        
+        data.addRow([1, 80]);
+        data.addRow([2, 76]);
+        data.addRow([3, 82]);
+        data.addRow([4, 79]);
+        
+        /*var options = {
+            title: 'Microsoft Price Chart',
+            titleTextStyle: {color: '#FFF'},
+            legend : {position:'none'},
+            backgroundColor: '#fcfcfc',
+            hAxis: {textStyle:{color: '#FFF'}},
+            vAxis: {
+                textStyle:{color: '#FFF'},
+                baselineColor: '#fff',
+                gridlineColor: '#fff'
+            },
+            backgroundColor:'#272626',
+            width: 700,
+            height: 500
+        };*/
+        var options = {
+            title: 'Stock Price Performance',
+            //curveType: 'function',
+            legend: { position: 'bottom' },
+            backgroundColor: '#000000',
+            legendTextStyle: { color: '#FFF' },
+            titleTextStyle: { color: '#FFF' },
+            hAxis: {
+                title: "Financial Quarter",
+                titleTextStyle:{color: '#FFF'},
+                textStyle:{color: '#FFF'}
+            },
+            vAxis: {
+                title: "Stock Price in $USD",
+                titleTextStyle:{color: '#FFF'},
+                textStyle:{color: '#FFF'}
+                
+            },
+            opacity: 0.8,
+            series: {
+                
+                0: { color: '#3BB9FF' },
+                1: { color: '#6CC417' }
+            }
+        };
+
+        var chart = new google.charts.Line(document.getElementById('linechart_material'));
+       chart.draw(data, google.charts.Line.convertOptions(options));
+         //chart.draw(data, options);
+    }
+</script>
+<!--  -->
 
 
 <body>
@@ -101,11 +166,12 @@
         </div>
         <div class="col-sm-6 col-sm-offset-3 col-md-8 col-md-offset-1 main"  style=" margin-top: 40px;">
           <div class="jumbotron" style=" margin-top: 40px;">
-			  <h2>Welcome to StockApp</h2>
+			  <!-- <h2>Welcome to StockApp</h2>
 			  <p>The best S&amp;P 500 Stock Application ever designed. Search your favourite stocks by market code and customise search results for a variety of indices and performance indicators.</p>
-		   
-		   
-          		
+		   width: 900px; height: 500px;
+		   -->
+          		<h2 style = "text-align: center;">Price Chart</h2>
+   				 <div align="center" id="linechart_material" style=" left: 0; right:0; margin: auto"></div>
         	
 			 
 		  </div>
