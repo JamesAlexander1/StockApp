@@ -41,14 +41,14 @@
         var data = new google.visualization.DataTable();
         data.addColumn('number', 'Date');
         data.addColumn('number', 'Price');
-               // <c:forEach items="${chart_data}" var="chartData">
-        //data.addRow([new Date(${chartData.year}, ${chartData.month}, ${chartData.day}), ${chartData.value}]);
-        //</c:forEach>
+        <c:forEach items="${week_list}" var="element">
+        	data.addRow([<c:out value="${element.day}"/>, <c:out value="${element.price}"/>]);
+        </c:forEach>
         
-        data.addRow([1, 80]);
+        /*data.addRow([1, 80]);
         data.addRow([2, 76]);
         data.addRow([3, 82]);
-        data.addRow([4, 79]);
+        data.addRow([4, 79]);*/
         
         /*var options = {
             title: 'Microsoft Price Chart',
@@ -69,18 +69,20 @@
             title: 'Stock Price Performance',
             //curveType: 'function',
             legend: { position: 'bottom' },
-            backgroundColor: '#000000',
+            backgroundColor: '#303030',
             legendTextStyle: { color: '#FFF' },
             titleTextStyle: { color: '#FFF' },
             hAxis: {
-                title: "Financial Quarter",
+                title: "Date This Week",
                 titleTextStyle:{color: '#FFF'},
                 textStyle:{color: '#FFF'}
             },
             vAxis: {
                 title: "Stock Price in $USD",
                 titleTextStyle:{color: '#FFF'},
-                textStyle:{color: '#FFF'}
+                textStyle:{color: '#FFF'},
+                format: 'decimal'
+               
                 
             },
             opacity: 0.8,
@@ -178,7 +180,7 @@
 		   width: 900px; height: 500px;
 		   -->
           		<h2 style = "text-align: center;">Price Chart</h2>
-   				 <div align="center" id="linechart_material" style=" left: 0; right:0; margin: auto"></div>
+   				 <div align="center" id="linechart_material" style="width: 550px; height: 400px; left: 0; right:0; margin: auto"></div>
         	
 			 
 		  </div>
