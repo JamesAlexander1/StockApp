@@ -31,6 +31,10 @@
 	
 	
 </head>
+
+
+
+
 <body>
 	
 	<nav class="navbar navbar-default navbar-fixed-top" style=" margin-bottom: 40px;">
@@ -42,15 +46,17 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">StockApp</a>
+          <a class="navbar-brand" href="/StockApp/home">StockApp</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
             
             <li><a href="#">Help</a></li>
           </ul>
-          <form class="navbar-form navbar-left" method="post" action="search">
-            <input type="text" class="form-control" placeholder="Search..." name="search_value">
+
+          <form class="navbar-form navbar-left" action="/StockApp/search" method="post">
+            <input type="text" name="search_code" class="form-control" placeholder="Search...">
+
             <button type="submit" class="btn btn-default">Submit</button>
           </form>
           
@@ -75,7 +81,10 @@
                 </tr>
                 
               </thead>
-              <tbody>	
+
+              <tbody>	<!--  Our sector query data will be displayed here	-->
+              
+
              <!-- Loop through each sector object, display name and yesterday's performance as a percentage increase or decrease on closing price --> 
 			<c:forEach items="${sector_list}" var="element">    
 				<tr>
@@ -101,11 +110,7 @@
           <div class="jumbotron" style=" margin-top: 40px;">
 			  <h2>Welcome to StockApp</h2>
 			  <p>The best S&amp;P 500 Stock Application ever designed. Search your favourite stocks by market code and customise search results for a variety of indices and performance indicators.</p>
-		  
-          
-			 ${pageContext.request.contextPath}/bootstrap/css/custom.css
-		  </div> 
-		  <div id=linechart_material>
+
 		  </div>
 
           

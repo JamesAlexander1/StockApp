@@ -36,7 +36,7 @@ public abstract class WeeklyClosingPriceParser {
             String[] timeAsString = entry.getKey().split("-");
             Integer[] time = new Integer[3];
             for(int i = 0; i < 3; i++){
-              
+
                 time[i] = Integer.parseInt(timeAsString[i]);
             }
             

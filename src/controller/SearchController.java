@@ -9,34 +9,38 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+
+import dao.SectorPerformDAO;
 import dao.WeekClosingPriceDAO;
 
 @WebServlet("/search")
-public class SearchController extends HttpServlet {
+public class SearchController extends HttpServlet{
 
-    WeekClosingPriceDAO dao = new WeekClosingPriceDAO();
-    
-    /**
-     * 
-     */
     private static final long serialVersionUID = 1L;
+    
+    private SectorPerformDAO sectorDao = new SectorPerformDAO("https://www.alphavantage.co/query?function=SECTOR&apikey=CR72JXL4TE7T2WF4");
+    private WeekClosingPriceDAO weekDao = new WeekClosingPriceDAO();
+    
     
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    
-        String search_code = request.getParameter("search_value");    
-        request.setAttribute("list", dao.queryData(search_code));
+        
+        String code = request.getParameter("search_code");
+        
+        request.setAttribute("sector_list", sectorDao.sectorQuery());
+        request.setAttribute("week_list", weekDao.queryData(code));
         
         
-        
-        RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/search.jsp");
+        RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/" + "search.jsp");
+       
         rd.forward(request, response);
-        
+
     }
     
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    
+
+
         doPost(request, response);
     }
 

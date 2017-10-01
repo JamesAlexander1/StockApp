@@ -21,7 +21,7 @@ import dao.SectorPerformDAO;
 @WebServlet({"/home", "/"})
 public class LandingController extends HttpServlet{
 
-    private static SectorPerformDAO dao = new SectorPerformDAO("https://www.alphavantage.co/query?function=SECTOR&apikey=CR72JXL4TE7T2WF4");
+    private SectorPerformDAO dao = new SectorPerformDAO("https://www.alphavantage.co/query?function=SECTOR&apikey=CR72JXL4TE7T2WF4");
     /**
      * 
      */

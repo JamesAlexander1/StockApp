@@ -6,7 +6,6 @@ import model.DatePricePoint;
 
 public interface DataAndPriceDAO<T> {
 
-      ArrayList<DatePricePoint<T>> queryData(String companyCode);
-      
-    
+    ArrayList<DatePricePoint<T>> queryData(String companyCode);
+
 }

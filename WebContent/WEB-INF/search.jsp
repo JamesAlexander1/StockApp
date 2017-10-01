@@ -27,12 +27,79 @@
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <link href="../../assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
 	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
-	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
 	
-
- 
-
 </head>
+
+<!-- Javascript -->
+
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript">
+    google.charts.load('current', {'packages':['line']});
+    google.charts.setOnLoadCallback(drawChart);
+    function drawChart() {
+        var data = new google.visualization.DataTable();
+        data.addColumn('number', 'Date');
+        data.addColumn('number', 'Price');
+               // <c:forEach items="${chart_data}" var="chartData">
+        //data.addRow([new Date(${chartData.year}, ${chartData.month}, ${chartData.day}), ${chartData.value}]);
+        //</c:forEach>
+        
+        data.addRow([1, 80]);
+        data.addRow([2, 76]);
+        data.addRow([3, 82]);
+        data.addRow([4, 79]);
+        
+        /*var options = {
+            title: 'Microsoft Price Chart',
+            titleTextStyle: {color: '#FFF'},
+            legend : {position:'none'},
+            backgroundColor: '#fcfcfc',
+            hAxis: {textStyle:{color: '#FFF'}},
+            vAxis: {
+                textStyle:{color: '#FFF'},
+                baselineColor: '#fff',
+                gridlineColor: '#fff'
+            },
+            backgroundColor:'#272626',
+            width: 700,
+            height: 500
+        };*/
+        var options = {
+            title: 'Stock Price Performance',
+            //curveType: 'function',
+            legend: { position: 'bottom' },
+            backgroundColor: '#000000',
+            legendTextStyle: { color: '#FFF' },
+            titleTextStyle: { color: '#FFF' },
+            hAxis: {
+                title: "Financial Quarter",
+                titleTextStyle:{color: '#FFF'},
+                textStyle:{color: '#FFF'}
+            },
+            vAxis: {
+                title: "Stock Price in $USD",
+                titleTextStyle:{color: '#FFF'},
+                textStyle:{color: '#FFF'}
+                
+            },
+            opacity: 0.8,
+            series: {
+                
+                0: { color: '#3BB9FF' },
+                1: { color: '#6CC417' }
+            }
+        };
+
+        var chart = new google.charts.Line(document.getElementById('linechart_material'));
+       chart.draw(data, google.charts.Line.convertOptions(options));
+         //chart.draw(data, options);
+    }
+</script>
+<!--  -->
+
+
+
 <body>
 	
 	<nav class="navbar navbar-default navbar-fixed-top" style=" margin-bottom: 40px;">
@@ -44,15 +111,19 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">StockApp</a>
+
+          <a class="navbar-brand" href="/StockApp/home">StockApp</a>
+
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
             
             <li><a href="#">Help</a></li>
           </ul>
-          <form class="navbar-form navbar-left" method="post" action="/search">
-            <input type="text" class="form-control" placeholder="Search..." name="search_value">
+
+          <form class="navbar-form navbar-left" action="/StockApp/search" method="post">
+            <input type="text" name="search_code" class="form-control" placeholder="Search...">
+
             <button type="submit" class="btn btn-default">Submit</button>
           </form>
           
@@ -69,56 +140,53 @@
             <li><a href="#" class="text-info">Analytics</a></li>
             <li><a href="#" class="text-info">Export</a></li>
           </ul>
-         </div>
-          	 
-    
+
+          <div class="table-responsive">
+            <table class="table table-striped">
+              <thead>
+                <tr>            
+                  <th>Sectors</th>
+                </tr>
+                
+              </thead>
+              <tbody>	<!--  Our sector query data will be displayed here	-->
+              
+             <!-- Loop through each sector object, display name and yesterday's performance as a percentage increase or decrease on closing price --> 
+			<c:forEach items="${sector_list}" var="element">    
+				<tr>
+				
+				<c:choose>
+					<c:when test="${element.value <= '0'}">
+						<td class="text-danger"><c:out value="${element.name}"/> : <c:out value="${element.value}"/></td>
+					</c:when>
+					<c:otherwise>
+						<td class="text-success"><c:out value="${element.name}"/> : <c:out value="${element.value}"/></td>
+					</c:otherwise>
+				</c:choose>
+
+   				</tr>
+			</c:forEach>
+			
+              </tbody>
+            </table>
+            </div>
+        </div>
         <div class="col-sm-6 col-sm-offset-3 col-md-8 col-md-offset-1 main"  style=" margin-top: 40px;">
-          <div style=" margin-top: 40px;" id=linechart_material>
- 				
-		  </div>   
+          <div class="jumbotron" style=" margin-top: 40px;">
+			  <!-- <h2>Welcome to StockApp</h2>
+			  <p>The best S&amp;P 500 Stock Application ever designed. Search your favourite stocks by market code and customise search results for a variety of indices and performance indicators.</p>
+		   width: 900px; height: 500px;
+		   -->
+          		<h2 style = "text-align: center;">Price Chart</h2>
+   				 <div align="center" id="linechart_material" style=" left: 0; right:0; margin: auto"></div>
+        	
+			 
+		  </div>
+
+          
         </div>
       </div>
     </div>
-   
-    <script>
-    google.charts.load('current', {'packages':['line']});
-    google.charts.setOnLoadCallback(drawChart);
-  	function drawChart() {
-  		
-  	
-	    var data = new google.visualization.DataTable();
-	    data.addColumn('number', 'Date');
-	    data.addColumn('number', 'Price');
-	    
-	    
-	    	
-	    	data.addRow(1, 80.1);
-	    	data.addRow(2, 76.5);
-	    	data.addRow(3, 84.1);
-	   
-					
-	    var options = {
-	      title: 'Test Price Chart',
-	      titleTextStyle: {color: '#FFF'},
-	      legend : {position:'none'},
-	      backgroundColor: '#fcfcfc',
-	      hAxis: {textStyle:{color: '#FFF'}},
-	      vAxis: {
-	    	  textStyle:{color: '#FFF'},
-	    	  baselineColor: '#fff',
-	    	  gridlineColor: '#fff'
-	      },
-		  backgroundColor:'#272626',
-	      width: 300px,
-	      height: 300px
-	    };
-	    var chart = new google.visualization.LineChart(document.getElementById('linechart_material'));
-	    chart.draw(data, google.charts.Line.convertOptions(options));
-  	}
-  	
-</script>
-<script src="${pageContext.request.contextPath}/bootstrap/js/bootstrap.min.js"></script>
 </body>
- 
- 
+ <script src="${pageContext.request.contextPath}/bootstrap/js/bootstrap.min.js"></script>
 </html>
