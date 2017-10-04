@@ -17,7 +17,7 @@
 	<!--  If we want to include javascript, we would store it in a .js file under WEB-INF and would reference it with a <script> tag
 	and call the js functions/code as needed in this html file  -->
 	
-	
+	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 	<!-- ${pageContext.request.contextPath} is a jstl variable, jstl is a scripting language for access servlet variables for use 
 	in jsp files. in this case, we are retrieving the root of the directory for all pages (WebContent/) -->
 	 <link href="${pageContext.request.contextPath}/bootstrap/css/darkly_bootstrap.min.css" rel="stylesheet" type="text/css" />
@@ -26,7 +26,7 @@
 	
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <link href="../../assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
-	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+	
 
 	
 </head>
@@ -95,7 +95,7 @@
             <span class="icon-bar"></span>
           </button>
 
-          <a class="navbar-brand" href="/StockApp/home">StockApp</a>
+          <a class="navbar-brand" href="${pageContext.request.contextPath}/home">StockApp</a>
 
         </div>
         <div id="navbar" class="navbar-collapse collapse">
@@ -104,7 +104,7 @@
             <li><a href="#">Help</a></li>
           </ul>
 
-          <form class="navbar-form navbar-left" action="/StockApp/search" method="post">
+          <form class="navbar-form navbar-left" action="${pageContext.request.contextPath}/search" method="post">
             <input type="text" name="search_code" class="form-control" placeholder="Search...">
 
             <button type="submit" class="btn btn-default">Submit</button>

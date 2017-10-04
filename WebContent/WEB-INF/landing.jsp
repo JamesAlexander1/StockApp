@@ -46,7 +46,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="/StockApp/home">StockApp</a>
+          <a class="navbar-brand" href="${pageContext.request.contextPath}/home">StockApp</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
@@ -54,7 +54,7 @@
             <li><a href="#">Help</a></li>
           </ul>
 
-          <form class="navbar-form navbar-left" action="/StockApp/search" method="post">
+          <form class="navbar-form navbar-left" action="${pageContext.request.contextPath}/search" method="post">
             <input type="text" name="search_code" class="form-control" placeholder="Search...">
 
             <button type="submit" class="btn btn-default">Submit</button>
@@ -111,10 +111,7 @@
 			  <h2>Welcome to StockApp</h2>
 			  <p>The best S&amp;P 500 Stock Application ever designed. Search your favourite stocks by market code and customise search results for a variety of indices and performance indicators.</p>
 				
-				<c:set var="myContext" value="${pageContext.request.contextPath}"/>
-				myContext: <c:out value = "${myContext}"/> /WebContent/bootstrap/js/bootstrap.min.js
-				
-				<%=application.getContextPath() %>
+		
 		  </div>
 
           
