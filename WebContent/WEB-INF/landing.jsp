@@ -13,15 +13,18 @@
 	<meta charset="UTF-8">
 	
 	<title>Hello</title>
+	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 	<!-- HTML for web page -->
 	<!--  If we want to include javascript, we would store it in a .js file under WEB-INF and would reference it with a <script> tag
 	and call the js functions/code as needed in this html file  -->
 	 <link href="${pageContext.request.contextPath}/bootstrap/css/darkly_bootstrap.min.css" rel="stylesheet" type="text/css" />
+	 
 	 <link href="${pageContext.request.contextPath}/bootstrap/css/custom.css" rel="stylesheet" type="text/css" />
-	
+	 <script src="${pageContext.request.contextPath}/bootstrap/js/bootstrap.min.js"></script>
+	 
 	<!-- ${pageContext.request.contextPath} is a jstl variable, jstl is a scripting language for access servlet variables for use 
 	in jsp files. in this case, we are retrieving the root of the directory for all pages (WebContent/) -->
-	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+	
 	
 	
 	
@@ -31,9 +34,6 @@
 	
 	
 </head>
-
-
-
 
 <body>
 	
@@ -110,7 +110,11 @@
           <div class="jumbotron" style=" margin-top: 40px;">
 			  <h2>Welcome to StockApp</h2>
 			  <p>The best S&amp;P 500 Stock Application ever designed. Search your favourite stocks by market code and customise search results for a variety of indices and performance indicators.</p>
-
+				
+				<c:set var="myContext" value="${pageContext.request.contextPath}"/>
+				myContext: <c:out value = "${myContext}"/> /WebContent/bootstrap/js/bootstrap.min.js
+				
+				<%=application.getContextPath() %>
 		  </div>
 
           
@@ -119,5 +123,5 @@
     </div>
     
 </body>
- <script src="${pageContext.request.contextPath}/bootstrap/js/bootstrap.min.js"></script>
+
 </html>

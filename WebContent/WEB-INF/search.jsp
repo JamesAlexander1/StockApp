@@ -39,32 +39,13 @@
     google.charts.setOnLoadCallback(drawChart);
     function drawChart() {
         var data = new google.visualization.DataTable();
-        data.addColumn('number', 'Date');
+        data.addColumn('date', 'Date');
         data.addColumn('number', 'Price');
         <c:forEach items="${week_list}" var="element">
-        	data.addRow([<c:out value="${element.day}"/>, <c:out value="${element.price}"/>]);
+        	data.addRow([new Date(<c:out value="${element.year}"/> ,<c:out value="${element.month}"/>, <c:out value="${element.day}"/> ), <c:out value="${element.price}"/>]);
         </c:forEach>
         
-        /*data.addRow([1, 80]);
-        data.addRow([2, 76]);
-        data.addRow([3, 82]);
-        data.addRow([4, 79]);*/
         
-        /*var options = {
-            title: 'Microsoft Price Chart',
-            titleTextStyle: {color: '#FFF'},
-            legend : {position:'none'},
-            backgroundColor: '#fcfcfc',
-            hAxis: {textStyle:{color: '#FFF'}},
-            vAxis: {
-                textStyle:{color: '#FFF'},
-                baselineColor: '#fff',
-                gridlineColor: '#fff'
-            },
-            backgroundColor:'#272626',
-            width: 700,
-            height: 500
-        };*/
         var options = {
             title: 'Stock Price Performance',
             //curveType: 'function',
