@@ -16,7 +16,11 @@ public class WeekClosingPriceDAO implements DataAndPriceDAO<DateClosingPricePoin
     @Override
     public  ArrayList<DatePricePoint<DateClosingPricePoint>> queryData(String companyCode) {
         
-        return WeeklyClosingPriceParser.parseJson(new StringJsonURL(URL + companyCode + KEY).getResponse());
+    	try {
+			return WeeklyClosingPriceParser.parseJson(new StringJsonURL(URL + companyCode + KEY).getResponse());
+    	} catch (Exception e) {
+    		return null;
+    	}
     }
 
 }
