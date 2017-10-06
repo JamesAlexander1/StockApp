@@ -36,10 +36,10 @@ public class SearchController extends HttpServlet{
         
         boolean validCode = true;
         
-        // All valid codes are length 4
-        if (code.length() != 4) {
-        	// if it's not length 4, it's invalid
-        	request.setAttribute("failure_reason", "you need to search for a stock code (4 letters)");
+        // All valid codes are less than length 6
+        if (code.length() > 5) {
+        	// if it's too long, it's invalid
+        	request.setAttribute("failure_reason", "you need to search for a stock code (5 characters or less)");
         	validCode = false;
         } else { 
         	// otherwise, it's valid!
@@ -51,7 +51,7 @@ public class SearchController extends HttpServlet{
 				request.setAttribute("week_list", weekData);
         	} else {
         		validCode = false;
-				request.setAttribute("failure_reason", "no such code exists");
+				request.setAttribute("failure_reason", "there's no stock called " + code);
         		
         	}
         }
