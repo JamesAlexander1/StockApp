@@ -30,17 +30,49 @@ public class SearchController extends HttpServlet{
     
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        
+        /**
+         * First check if the price was directed from the search bar. If it was then load the yearly chart.
+         * If the page was not directed from the search button, then user must have clicked on one of the time
+         * period buttons. If that was the case we check which button was clicked, then load that relevant time
+         * period. Button handling is handled by the else statement
+         */
         String code = request.getParameter("search_code");
-        
+        //default graph is the yearly graph when the user just enters the code through the search bar.
+        if (code != null) {
+        	request.setAttribute("company", code);
+            request.setAttribute("yearly_list", yearlyDao.queryData(code));
+        //otherwise they must've pressed a time period button
+        } else {
+            if (request.getParameter("half_year") != null) {
+                request.setAttribute("company", request.getParameter("half_year"));
+                request.setAttribute("yearly_list", halfYearlyDao.queryData(request.getParameter("half_year")));
+            
+            } else if (request.getParameter("yearly") != null) {
+                request.setAttribute("company", request.getParameter("yearly"));
+                request.setAttribute("yearly_list", yearlyDao.queryData(request.getParameter("yearly")));
+            
+            } else if (request.getParameter("quarterly") != null) {
+                request.setAttribute("company", request.getParameter("quarterly"));
+                request.setAttribute("yearly_list", quarterlyDao.queryData(request.getParameter("quarterly")));
+            
+            } else if (request.getParameter("monthly") != null) {
+                request.setAttribute("company", request.getParameter("monthly"));
+            	request.setAttribute("yearly_list", monthDao.queryData(request.getParameter("monthly")));
+            
+            } else if (request.getParameter("weekly") != null) {
+                request.setAttribute("company", request.getParameter("weekly"));
+            	request.setAttribute("yearly_list", weekDao.queryData(request.getParameter("weekly")));
+            
+           //not sure how to do this is it even possible to have an else here?
+            } else {
+                request.setAttribute("company", request.getParameter("half_year"));
+                request.setAttribute("yearly_list", yearlyDao.queryData(request.getParameter("half_year")));
+            }
+
+        }
+       
         request.setAttribute("sector_list", sectorDao.sectorQuery());
-        request.setAttribute("week_list", weekDao.queryData(code));
-        request.setAttribute("month_list", monthDao.queryData(code));
-        request.setAttribute("quarterly_list", quarterlyDao.queryData(code));
-        request.setAttribute("halfYearly_list", halfYearlyDao.queryData(code));
-        request.setAttribute("yearly_list", yearlyDao.queryData(code));
-        request.setAttribute("company", code);
-        
+
         RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/" + "search.jsp");
        
         rd.forward(request, response);

@@ -12,7 +12,7 @@
 
 	<meta charset="UTF-8">
 	
-	<title>Hello</title>
+	<title>S&P 500 Price Charts</title>
 	<!-- HTML for web page -->
 	<!--  If we want to include javascript, we would store it in a .js file under WEB-INF and would reference it with a <script> tag
 	and call the js functions/code as needed in this html file  -->
@@ -40,179 +40,10 @@
     
     
     /*
-     * For now, just uncomment whichever graph you want to display. We need to add conditional statements
-     * depending on which time period the user wants.
+     * SearchController.java loads the relevant time period, search.jsp only has to load whatever it is given.
      */
     
     function drawChart() {
-        /*var data = new google.visualization.DataTable();
-        data.addColumn('date', 'Date');
-        data.addColumn('number', 'Price');
-        <c:forEach items="${week_list}" var="element">
-        	data.addRow([new Date(<c:out value="${element.year}"/> ,<c:out value="${element.month}"/>, <c:out value="${element.day}"/> ), <c:out value="${element.price}"/>]);
-        </c:forEach>
-        
-        var options = {
-                title: 'Stock Price Performance',
-                //curveType: 'function',
-                legend: { position: 'bottom' },
-                backgroundColor: '#303030',
-                legendTextStyle: { color: '#FFF' },
-                titleTextStyle: { color: '#FFF' },
-                hAxis: {
-                    title: "Date This Week",
-                    titleTextStyle:{color: '#FFF'},
-                    textStyle:{color: '#FFF'}
-                },
-                vAxis: {
-                    title: "Stock Price in $USD",
-                    titleTextStyle:{color: '#FFF'},
-                    textStyle:{color: '#FFF'},
-                    format: 'decimal'
-                   
-                    
-                },
-                opacity: 0.8,
-                series: {
-                    
-                    0: { color: '#3BB9FF' },
-                    1: { color: '#6CC417' }
-                }
-            };
-        
-        var chart = new google.charts.Line(document.getElementById('linechart_material'));
-        chart.draw(data, google.charts.Line.convertOptions(options));*/
-        
-        /*var dataMonth = new google.visualization.DataTable();
-        dataMonth.addColumn('date', 'Date');
-        dataMonth.addColumn('number', 'Price');
-        
-        <c:forEach items="${month_list}" var="element">
-    		dataMonth.addRow([new Date(<c:out value="${element.year}"/> ,<c:out value="${element.month}"/>, <c:out value="${element.day}"/> ), <c:out value="${element.price}"/>]);
-        </c:forEach>
-        
-        
-        
-        var optionsMonth = {
-                title: 'Stock Price Performance',
-                //curveType: 'function',
-                legend: { position: 'bottom' },
-                backgroundColor: '#303030',
-                legendTextStyle: { color: '#FFF' },
-                titleTextStyle: { color: '#FFF' },
-                hAxis: {
-                    title: "Date This Month",
-                    titleTextStyle:{color: '#FFF'},
-                    textStyle:{color: '#FFF'}
-                },
-                vAxis: {
-                    title: "Stock Price in $USD",
-                    titleTextStyle:{color: '#FFF'},
-                    textStyle:{color: '#FFF'},
-                    format: 'decimal'
-                   
-                    
-                },
-                opacity: 0.8,
-                series: {
-                    
-                    0: { color: '#3BB9FF' },
-                    1: { color: '#6CC417' }
-                }
-            };
-
-       
-       
-       var chartMonth = new google.charts.Line(document.getElementById('linechart_material'));
-       chartMonth.draw(dataMonth, google.charts.Line.convertOptions(optionsMonth));*/
-       
-       
-    	/*var dataQuarterly = new google.visualization.DataTable();
-        dataQuarterly.addColumn('date', 'Date');
-        dataQuarterly.addColumn('number', 'Price');
-        
-        <c:forEach items="${quarterly_list}" var="element">
-    		dataQuarterly.addRow([new Date(<c:out value="${element.year}"/> ,<c:out value="${element.month}"/>, <c:out value="${element.day}"/> ), <c:out value="${element.price}"/>]);
-        </c:forEach>
-        
-        
-        
-        var optionsQuarterly = {
-                title: 'Stock Price Performance',
-                //curveType: 'function',
-                legend: { position: 'bottom' },
-                backgroundColor: '#303030',
-                legendTextStyle: { color: '#FFF' },
-                titleTextStyle: { color: '#FFF' },
-                hAxis: {
-                    title: "Date This Quarter",
-                    titleTextStyle:{color: '#FFF'},
-                    textStyle:{color: '#FFF'}
-                },
-                vAxis: {
-                    title: "Stock Price in $USD",
-                    titleTextStyle:{color: '#FFF'},
-                    textStyle:{color: '#FFF'},
-                    format: 'decimal'
-                   
-                    
-                },
-                opacity: 0.8,
-                series: {
-                    
-                    0: { color: '#3BB9FF' },
-                    1: { color: '#6CC417' }
-                }
-            };
-
-       
-       
-       var chartQuarterly = new google.charts.Line(document.getElementById('linechart_material'));
-       chartQuarterly.draw(dataQuarterly, google.charts.Line.convertOptions(optionsQuarterly));*/
-       
-       /*var dataHalfYearly = new google.visualization.DataTable();
-       dataHalfYearly.addColumn('date', 'Date');
-       dataHalfYearly.addColumn('number', 'Price');
-       
-       <c:forEach items="${halfYearly_list}" var="element">
-   			dataHalfYearly.addRow([new Date(<c:out value="${element.year}"/> ,<c:out value="${element.month}"/>, <c:out value="${element.day}"/> ), <c:out value="${element.price}"/>]);
-   	   </c:forEach>
-       
-       
-       
-       var optionsHalfYearly = {
-               title: 'Stock Price Performance',
-               //curveType: 'function',
-               legend: { position: 'bottom' },
-               backgroundColor: '#303030',
-               legendTextStyle: { color: '#FFF' },
-               titleTextStyle: { color: '#FFF' },
-               hAxis: {
-                   title: "Date This Half Year",
-                   titleTextStyle:{color: '#FFF'},
-                   textStyle:{color: '#FFF'}
-               },
-               vAxis: {
-                   title: "Stock Price in $USD",
-                   titleTextStyle:{color: '#FFF'},
-                   textStyle:{color: '#FFF'},
-                   format: 'decimal'
-                  
-                   
-               },
-               opacity: 0.8,
-               series: {
-                   
-                   0: { color: '#3BB9FF' },
-                   1: { color: '#6CC417' }
-               }
-           };
-
-      
-      
-      var chartHalfYearly = new google.charts.Line(document.getElementById('linechart_material'));
-      chartHalfYearly.draw(dataHalfYearly, google.charts.Line.convertOptions(optionsHalfYearly));*/
-      
       var dataYearly = new google.visualization.DataTable();
       dataYearly.addColumn('date', 'Date');
       dataYearly.addColumn('number', 'Price');
@@ -334,17 +165,19 @@
         </div>
         <div class="col-sm-6 col-sm-offset-3 col-md-8 col-md-offset-1 main"  style=" margin-top: 40px;">
           <div class="jumbotron" style=" margin-top: 40px;">
-			  <!-- <h2>Welcome to StockApp</h2>
-			  <p>The best S&amp;P 500 Stock Application ever designed. Search your favourite stocks by market code and customise search results for a variety of indices and performance indicators.</p>
-		   width: 900px; height: 500px;
-		   -->
           		<h2 style = "text-align: center;"><c:out value="${company}" /></h2>
    				 <div align="center" id="linechart_material" style="width: 550px; height: 400px; left: 0; right:0; margin: auto"></div>
-        	
-			 
+                 <form class="navbar-form navbar-left" action="${pageContext.request.contextPath}/search" method="post">
+	            		<button type="submit" class="btn btn-default" name="yearly" value="${company}">Yearly</button>
+	            		<button type="submit" class="btn btn-default" name="half_year" value="${company}">Half Yearly</button>
+			            <button type="submit" class="btn btn-default" name="quarterly" value="${company}">Quarterly</button>
+	            		<button type="submit" class="btn btn-default" name="monthly" value="${company}">Monthly</button>
+	            		<button type="submit" class="btn btn-default" name="weekly" value="${company}">Weekly</button>
+            		
+          		</form>
 		  </div>
 
-          
+
         </div>
       </div>
     </div>
