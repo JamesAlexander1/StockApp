@@ -15,6 +15,7 @@ import dao.QuarterlyClosingPriceDAO;
 import dao.SectorPerformDAO;
 import dao.WeekClosingPriceDAO;
 import dao.YearlyClosingPriceDAO;
+import dao.smaChart;
 
 @WebServlet("/search")
 public class SearchController extends HttpServlet{
@@ -35,42 +36,65 @@ public class SearchController extends HttpServlet{
          * If the page was not directed from the search button, then user must have clicked on one of the time
          * period buttons. If that was the case we check which button was clicked, then load that relevant time
          * period. Button handling is handled by the else statement
+         * for time period 
+         * 0 = yearly
+         * 1 = half yearly
+         * 2 = quarterly
+         * 3 = monthly
+         * 4 = weekly
          */
+	    
+   
         String code = request.getParameter("search_code");
         //default graph is the yearly graph when the user just enters the code through the search bar.
         if (code != null) {
-        	request.setAttribute("company", code);
+        	    request.setAttribute("company", code);
             request.setAttribute("yearly_list", yearlyDao.queryData(code));
+            request.setAttribute("time", 0);
         //otherwise they must've pressed a time period button
         } else {
             if (request.getParameter("half_year") != null) {
                 request.setAttribute("company", request.getParameter("half_year"));
                 request.setAttribute("yearly_list", halfYearlyDao.queryData(request.getParameter("half_year")));
+                request.setAttribute("time", 1);
             
             } else if (request.getParameter("yearly") != null) {
                 request.setAttribute("company", request.getParameter("yearly"));
                 request.setAttribute("yearly_list", yearlyDao.queryData(request.getParameter("yearly")));
-            
+                request.setAttribute("time", 0);
+      
             } else if (request.getParameter("quarterly") != null) {
                 request.setAttribute("company", request.getParameter("quarterly"));
                 request.setAttribute("yearly_list", quarterlyDao.queryData(request.getParameter("quarterly")));
-            
+                request.setAttribute("time", 2);
+
             } else if (request.getParameter("monthly") != null) {
                 request.setAttribute("company", request.getParameter("monthly"));
-            	request.setAttribute("yearly_list", monthDao.queryData(request.getParameter("monthly")));
-            
+                request.setAttribute("yearly_list", monthDao.queryData(request.getParameter("monthly")));
+            		request.setAttribute("time", 3);
+
             } else if (request.getParameter("weekly") != null) {
                 request.setAttribute("company", request.getParameter("weekly"));
-            	request.setAttribute("yearly_list", weekDao.queryData(request.getParameter("weekly")));
-            
+            	    request.setAttribute("yearly_list", weekDao.queryData(request.getParameter("weekly")));
+                request.setAttribute("time", 4);
+
            //not sure how to do this is it even possible to have an else here?
-            } else {
+            } /*else {
                 request.setAttribute("company", request.getParameter("half_year"));
                 request.setAttribute("yearly_list", yearlyDao.queryData(request.getParameter("half_year")));
-            }
+                request.setAttribute("time", 1);
+
+            }*/
 
         }
-       
+        
+        //if user wants to see sma (simple moving average) tech indicator
+	    	if (request.getParameter("sma") != null) {
+	    		String time = request.getParameter("timePeriod");
+	    		smaChart sma = new smaChart(time);
+	    		request.setAttribute("sma_chart", sma.queryData(request.getParameter("sma")));
+	    		request.setAttribute("yearly_list", yearlyDao.queryData(request.getParameter("sma")));
+	    	}
         request.setAttribute("sector_list", sectorDao.sectorQuery());
 
         RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/" + "search.jsp");

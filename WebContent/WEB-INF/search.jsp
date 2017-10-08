@@ -45,13 +45,26 @@
     
     function drawChart() {
       var dataYearly = new google.visualization.DataTable();
-      dataYearly.addColumn('date', 'Date');
-      dataYearly.addColumn('number', 'Price');
       
-      <c:forEach items="${yearly_list}" var="element">
-  			dataYearly.addRow([new Date(<c:out value="${element.year}"/> ,<c:out value="${element.month}"/>, <c:out value="${element.day}"/> ), <c:out value="${element.price}"/>]);
-  	   </c:forEach>
-      
+     <c:choose>
+     <c:when test="${not empty sma_chart}">
+     		dataYearly.addColumn('date', 'Date');
+        		dataYearly.addColumn('number', 'Price');
+        		dataYearly.addColumn('number', 'SMA');
+	     <c:forEach items="${sma_chart}" varStatus="element">
+	   			dataYearly.addRow([new Date(<c:out value="${sma_chart[element.index].year}"/> ,<c:out value="${sma_chart[element.index].month}"/>, 
+	   					<c:out value="${sma_chart[element.index].day}"/> ), <c:out value="${sma_chart[element.index].price}"/>, 
+	   					<c:out value="${yearly_list[element.index].price}"/>]);
+	   	 </c:forEach>
+     </c:when>
+     <c:otherwise>
+     		dataYearly.addColumn('date', 'Date');
+			dataYearly.addColumn('number', 'Price');
+     	<c:forEach items="${yearly_list}" varStatus="element">
+			dataYearly.addRow([new Date(<c:out value="${yearly_list[element.index].year}"/> ,<c:out value="${yearly_list[element.index].month}"/>, <c:out value="${yearly_list[element.index].day}"/> ), <c:out value="${yearly_list[element.index].price}"/>]);
+	 	</c:forEach>
+     </c:otherwise>  	 		
+  	 </c:choose>
       
       
       var optionsYearly = {
@@ -167,16 +180,23 @@
           <div class="jumbotron" style=" margin-top: 40px;">
           		<h2 style = "text-align: center;"><c:out value="${company}" /></h2>
    				 <div align="center" id="linechart_material" style="width: 550px; height: 400px; left: 0; right:0; margin: auto"></div>
-                 <form class="navbar-form navbar-left" action="${pageContext.request.contextPath}/search" method="post">
+                 <form class="navbar-form navbar-left" action="${pageContext.request.contextPath}/search" method="post">                
 	            		<button type="submit" class="btn btn-default" name="yearly" value="${company}">Yearly</button>
 	            		<button type="submit" class="btn btn-default" name="half_year" value="${company}">Half Yearly</button>
 			            <button type="submit" class="btn btn-default" name="quarterly" value="${company}">Quarterly</button>
 	            		<button type="submit" class="btn btn-default" name="monthly" value="${company}">Monthly</button>
 	            		<button type="submit" class="btn btn-default" name="weekly" value="${company}">Weekly</button>
-            		
           		</form>
 		  </div>
-
+		  <div class="jumbotron" style=" margin-top: 40px;">
+          		<h2 style = "text-align: center;"><c:out value="Technical Indicators" /></h2>
+   				 <div align="center" id="linechart_material" style="width: 550px; height: 400px; left: 0; right:0; margin: auto"></div>
+                 <form class="navbar-form navbar-left" action="${pageContext.request.contextPath}/search" method="post">  
+                 	<input type="hidden" name="timePeriod" value="${time}">              
+	            		<button type="submit" class="btn btn-default" name="sma" value="${company}">Simple Moving Average</button>
+          		</form>
+		  </div>
+		
 
         </div>
       </div>
