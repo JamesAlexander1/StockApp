@@ -18,16 +18,23 @@ public class smaWeek {
 	        
 	        ArrayList<DatePricePoint<DateClosingPricePoint>> list = new ArrayList<DatePricePoint<DateClosingPricePoint>>();
 	        list.ensureCapacity(50);
-	        
+	        System.out.println("In HERE");
+	        System.out.println(json);
 	        JsonElement element = new JsonParser().parse(json);
 	        JsonObject yearlyClosingPrice = element.getAsJsonObject();
 	        yearlyClosingPrice = yearlyClosingPrice.getAsJsonObject("Technical Analysis: SMA");
 	        System.out.println(json);
 	        Iterator<Entry<String, JsonElement>> iterator = yearlyClosingPrice.entrySet().iterator();
 	        int temp = 0;
+	        int timePeriodCounter = 0;
+	        if (period.equals("0")) {
+	        		timePeriodCounter = 48;
+	        } else {
+	        		timePeriodCounter = 24;
+	        }
 	        while(iterator.hasNext()){
 	            
-	            if(temp >= 48){
+	            if(temp >= timePeriodCounter){
 	                break;
 	            }
 	            Entry<String, JsonElement> entry = iterator.next();
@@ -39,7 +46,7 @@ public class smaWeek {
 	            }
 	            
 	            list.add(new DateClosingPricePoint(new GregorianCalendar(time[0], time[1], time[2]), entry.getValue().getAsJsonObject().get("SMA").getAsDouble()));
-	            System.out.println(entry.getValue().getAsJsonObject().get("SMA").getAsDouble());
+	            //System.out.println(entry.getValue().getAsJsonObject().get("SMA").getAsDouble());
 	            temp ++;
 	        }
 	        
