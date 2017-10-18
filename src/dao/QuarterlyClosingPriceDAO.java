@@ -9,7 +9,7 @@ import model.DatePricePoint;
 
 public class QuarterlyClosingPriceDAO implements DataAndPriceDAO<DateClosingPricePoint> {
 
-    private static String URL = "https://www.alphavantage.co/query?function=TIME_SERIES_WEEKLY&symbol=";
+    private static String URL = "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=";
     private static String KEY = "&apikey=CR72JXL4TE7T2WF4";
     
 

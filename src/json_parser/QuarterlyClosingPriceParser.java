@@ -18,18 +18,18 @@ public abstract class QuarterlyClosingPriceParser {
         
         
         ArrayList<DatePricePoint<DateClosingPricePoint>> list = new ArrayList<DatePricePoint<DateClosingPricePoint>>();
-        list.ensureCapacity(31);
+        list.ensureCapacity(119);
         
         JsonElement element = new JsonParser().parse(json);
         JsonObject quarterlyClosingPrice = element.getAsJsonObject();
-        quarterlyClosingPrice = quarterlyClosingPrice.getAsJsonObject("Weekly Time Series");
+        quarterlyClosingPrice = quarterlyClosingPrice.getAsJsonObject("Time Series (Daily)");
         
         Iterator<Entry<String, JsonElement>> iterator = quarterlyClosingPrice.entrySet().iterator();
         
         int temp = 0;
         while(iterator.hasNext()){
             
-            if(temp >= 12){
+            if(temp >= 118){
                 break;
             }
             Entry<String, JsonElement> entry = iterator.next();

@@ -12,7 +12,7 @@ import com.google.gson.JsonParser;
 import model.DateClosingPricePoint;
 import model.DatePricePoint;
 
-public class smaDaily {
+public class rsiDaily {
 	 public static ArrayList<DatePricePoint<DateClosingPricePoint>> parseJson(String json, String period){
 		 /**
 	         * 0 = yearly
@@ -25,7 +25,7 @@ public class smaDaily {
 	        
 	        JsonElement element = new JsonParser().parse(json);
 	        JsonObject weekClosingPrice = element.getAsJsonObject();
-	        weekClosingPrice = weekClosingPrice.getAsJsonObject("Technical Analysis: SMA");
+	        weekClosingPrice = weekClosingPrice.getAsJsonObject("Technical Analysis: RSI");
 	        
 	        Iterator<Entry<String, JsonElement>> iterator = weekClosingPrice.entrySet().iterator();
 	        
@@ -58,7 +58,7 @@ public class smaDaily {
 	                time[i] = Integer.parseInt(timeAsString[i]);
 	            }
 
-	            list.add(new DateClosingPricePoint(new GregorianCalendar(time[0], time[1], time[2]), entry.getValue().getAsJsonObject().get("SMA").getAsDouble()));
+	            list.add(new DateClosingPricePoint(new GregorianCalendar(time[0], time[1], time[2]), entry.getValue().getAsJsonObject().get("RSI").getAsDouble()));
 	            temp ++;
 	        }
 	        return list;
