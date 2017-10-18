@@ -34,7 +34,7 @@ public class DataPriceDAOFactory implements IDAOFactory<DataAndPriceDAO<DateClos
             
             dao = new WeekClosingPriceDAO();
         }else {
-            //ERROR
+            dao = new HalfYearlyClosingPriceDAO();
         }
         return dao;
     }

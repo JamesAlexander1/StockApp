@@ -198,8 +198,8 @@
           		<h2 style = "text-align: center;"><c:out value="Technical Indicators" /></h2>
    				 <div align="center" id="linechart_material" style="width: 550px; height: 400px; left: 0; right:0; margin: auto"></div>
                  <form class="navbar-form navbar-left" action="${pageContext.request.contextPath}/search" method="post">  
-                 	<input type="hidden" name="time_period" value="${time}">              
-	            		<button type="submit" class="btn btn-default" name="sma" value="${company}">Simple Moving Average</button>
+                 	<input type="hidden" name="enum_time" value="${time}">              
+	            		<button type="submit" class="btn btn-default" name="sma_company" value="${company}">Simple Moving Average</button>
           		</form>
 		  </div>
 		
