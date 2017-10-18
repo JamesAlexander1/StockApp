@@ -12,7 +12,7 @@
 
 	<meta charset="UTF-8">
 	
-	<title>S&P 500 Price Charts</title>
+	<title>SandP 500 Price Charts</title>
 	<!-- HTML for web page -->
 	<!--  If we want to include javascript, we would store it in a .js file under WEB-INF and would reference it with a <script> tag
 	and call the js functions/code as needed in this html file  -->

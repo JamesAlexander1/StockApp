@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import dao.DataAndPriceDAO;
 import dao.HalfYearlyClosingPriceDAO;
 import dao.MonthClosingPriceDAO;
 import dao.QuarterlyClosingPriceDAO;
@@ -16,6 +17,7 @@ import dao.SectorPerformDAO;
 import dao.WeekClosingPriceDAO;
 import dao.YearlyClosingPriceDAO;
 import dao.smaChart;
+import model.DateClosingPricePoint;
 
 @WebServlet("/search")
 public class SearchController extends HttpServlet{
@@ -28,6 +30,10 @@ public class SearchController extends HttpServlet{
     private QuarterlyClosingPriceDAO quarterlyDao = new QuarterlyClosingPriceDAO();
     private HalfYearlyClosingPriceDAO halfYearlyDao = new HalfYearlyClosingPriceDAO();
     private YearlyClosingPriceDAO yearlyDao = new YearlyClosingPriceDAO();
+    
+    private DataAndPriceDAO<DateClosingPricePoint> dao = null;
+    
+    
     
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

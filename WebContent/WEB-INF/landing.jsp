@@ -12,7 +12,7 @@
 
 	<meta charset="UTF-8">
 	
-	<title>S&P 500 Price Charts</title>
+	<title>SandP 500 Price Charts</title>
 	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 	<!-- HTML for web page -->
 	<!--  If we want to include javascript, we would store it in a .js file under WEB-INF and would reference it with a <script> tag

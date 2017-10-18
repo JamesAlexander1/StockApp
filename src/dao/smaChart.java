@@ -3,7 +3,7 @@ package dao;
 import java.util.ArrayList;
 
 import http.StringJsonURL;
-import json_parser.YearlyClosingPriceParser;
+
 import json_parser.smaWeek;
 import model.DateClosingPricePoint;
 import model.DatePricePoint;
