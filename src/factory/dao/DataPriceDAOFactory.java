@@ -14,7 +14,7 @@ public class DataPriceDAOFactory implements IDAOFactory<DataAndPriceDAO<DateClos
     public DataAndPriceDAO<DateClosingPricePoint> instantiateDAO(String daoType){
         
         DataAndPriceDAO<DateClosingPricePoint> dao = null;
-        if(daoType.contains("half_year")) {
+        if(daoType.contains("half_yearly")) {
             
             dao = new HalfYearlyClosingPriceDAO();
             
@@ -37,5 +37,9 @@ public class DataPriceDAOFactory implements IDAOFactory<DataAndPriceDAO<DateClos
             //ERROR
         }
         return dao;
+    }
+    
+    public static DataPriceDAOFactory getInstance() {
+        return new DataPriceDAOFactory();
     }
 }

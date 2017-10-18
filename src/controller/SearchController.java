@@ -17,20 +17,21 @@ import dao.SectorPerformDAO;
 import dao.WeekClosingPriceDAO;
 import dao.YearlyClosingPriceDAO;
 import dao.smaChart;
+import factory.dao.DataPriceDAOFactory;
+import factory.dao.IDAOFactory;
 import model.DateClosingPricePoint;
-
+import model.NumeratedTimePeriods;
 @WebServlet("/search")
 public class SearchController extends HttpServlet{
 
     private static final long serialVersionUID = 1L;
     
     private SectorPerformDAO sectorDao = new SectorPerformDAO("https://www.alphavantage.co/query?function=SECTOR&apikey=CR72JXL4TE7T2WF4");
-    private WeekClosingPriceDAO weekDao = new WeekClosingPriceDAO();
-    private MonthClosingPriceDAO monthDao = new MonthClosingPriceDAO();
-    private QuarterlyClosingPriceDAO quarterlyDao = new QuarterlyClosingPriceDAO();
-    private HalfYearlyClosingPriceDAO halfYearlyDao = new HalfYearlyClosingPriceDAO();
+    
+  
     private YearlyClosingPriceDAO yearlyDao = new YearlyClosingPriceDAO();
     
+    private IDAOFactory<DataAndPriceDAO<DateClosingPricePoint>> daoFactory = DataPriceDAOFactory.getInstance();
     private DataAndPriceDAO<DateClosingPricePoint> dao = null;
     
     
@@ -54,43 +55,49 @@ public class SearchController extends HttpServlet{
         String code = request.getParameter("search_code");
         //default graph is the yearly graph when the user just enters the code through the search bar.
         if (code != null) {
+            
+        	    
+        	    
+        	    dao = daoFactory.instantiateDAO("yearly");
+        	    
         	    request.setAttribute("company", code);
-            request.setAttribute("yearly_list", yearlyDao.queryData(code));
-            request.setAttribute("time", 0);
+            request.setAttribute("yearly_list", dao.queryData(code));
+            request.setAttribute("time", NumeratedTimePeriods.YEARLY.getValue());
         //otherwise they must've pressed a time period button
         } else {
-            if (request.getParameter("half_year") != null) {
-                request.setAttribute("company", request.getParameter("half_year"));
-                request.setAttribute("yearly_list", halfYearlyDao.queryData(request.getParameter("half_year")));
-                request.setAttribute("time", 1);
             
-            } else if (request.getParameter("yearly") != null) {
-                request.setAttribute("company", request.getParameter("yearly"));
-                request.setAttribute("yearly_list", yearlyDao.queryData(request.getParameter("yearly")));
-                request.setAttribute("time", 0);
+            String company = request.getParameter("company");
+            
+            request.setAttribute("company", company);
+            
+            String time_period = request.getParameter("time_period");
+            dao = daoFactory.instantiateDAO(time_period);
+            request.setAttribute("yearly_list", dao.queryData(company));
+            
+            if (time_period.matches("half_yearly")) {
+              
+               
+                request.setAttribute("time", NumeratedTimePeriods.HALF_YEARLY.getValue());
+            
+            } else if (time_period.matches("yearly")) {
+                
+              
+                request.setAttribute("time", NumeratedTimePeriods.YEARLY.getValue());
       
-            } else if (request.getParameter("quarterly") != null) {
-                request.setAttribute("company", request.getParameter("quarterly"));
-                request.setAttribute("yearly_list", quarterlyDao.queryData(request.getParameter("quarterly")));
-                request.setAttribute("time", 2);
+            } else if (time_period.matches("quarterly")) {
+            
+                
+                request.setAttribute("time", NumeratedTimePeriods.QUARTERLY.getValue());
 
-            } else if (request.getParameter("monthly") != null) {
-                request.setAttribute("company", request.getParameter("monthly"));
-                request.setAttribute("yearly_list", monthDao.queryData(request.getParameter("monthly")));
-            		request.setAttribute("time", 3);
+            } else if (time_period.matches("monthly")) {
+             
+            		request.setAttribute("time", NumeratedTimePeriods.MONTHLY.getValue());
 
-            } else if (request.getParameter("weekly") != null) {
-                request.setAttribute("company", request.getParameter("weekly"));
-            	    request.setAttribute("yearly_list", weekDao.queryData(request.getParameter("weekly")));
-                request.setAttribute("time", 4);
+            } else if (time_period.matches("weekly")) {
+                
+                request.setAttribute("time", NumeratedTimePeriods.WEEKLY.getValue());
 
-           //not sure how to do this is it even possible to have an else here?
-            } /*else {
-                request.setAttribute("company", request.getParameter("half_year"));
-                request.setAttribute("yearly_list", yearlyDao.queryData(request.getParameter("half_year")));
-                request.setAttribute("time", 1);
-
-            }*/
+            }
 
         }
         

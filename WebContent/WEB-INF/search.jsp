@@ -48,6 +48,7 @@
       
      <c:choose>
      <c:when test="${not empty sma_chart}">
+     
      		dataYearly.addColumn('date', 'Date');
         		dataYearly.addColumn('number', 'Price');
         		dataYearly.addColumn('number', 'SMA');
@@ -180,19 +181,24 @@
           <div class="jumbotron" style=" margin-top: 40px;">
           		<h2 style = "text-align: center;"><c:out value="${company}" /></h2>
    				 <div align="center" id="linechart_material" style="width: 550px; height: 400px; left: 0; right:0; margin: auto"></div>
-                 <form class="navbar-form navbar-left" action="${pageContext.request.contextPath}/search" method="post">                
-	            		<button type="submit" class="btn btn-default" name="yearly" value="${company}">Yearly</button>
-	            		<button type="submit" class="btn btn-default" name="half_year" value="${company}">Half Yearly</button>
-			            <button type="submit" class="btn btn-default" name="quarterly" value="${company}">Quarterly</button>
-	            		<button type="submit" class="btn btn-default" name="monthly" value="${company}">Monthly</button>
-	            		<button type="submit" class="btn btn-default" name="weekly" value="${company}">Weekly</button>
+   				 
+                 <form class="navbar-form navbar-left" action="${pageContext.request.contextPath}/search" method="post">           
+                      
+	            		<button type="submit" class="btn btn-default" name="time_period" value="yearly">Yearly</button>
+	            		<button type="submit" class="btn btn-default" name="time_period" value="half_yearly">Half Yearly</button>
+		            <button type="submit" class="btn btn-default" name="time_period" value="quarterly">Quarterly</button>
+	            		<button type="submit" class="btn btn-default" name="time_period" value="monthly">Monthly</button>
+	            		<button type="submit" class="btn btn-default" name="time_period" value="weekly">Weekly</button>
+	            		
+	            		<input type=hidden name="company" value="${company}">
+	            		
           		</form>
 		  </div>
 		  <div class="jumbotron" style=" margin-top: 40px;">
           		<h2 style = "text-align: center;"><c:out value="Technical Indicators" /></h2>
    				 <div align="center" id="linechart_material" style="width: 550px; height: 400px; left: 0; right:0; margin: auto"></div>
                  <form class="navbar-form navbar-left" action="${pageContext.request.contextPath}/search" method="post">  
-                 	<input type="hidden" name="timePeriod" value="${time}">              
+                 	<input type="hidden" name="time_period" value="${time}">              
 	            		<button type="submit" class="btn btn-default" name="sma" value="${company}">Simple Moving Average</button>
           		</form>
 		  </div>
