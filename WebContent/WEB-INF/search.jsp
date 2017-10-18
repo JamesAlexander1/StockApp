@@ -267,20 +267,7 @@
             </div>
         </div>
         <div class="col-sm-6 col-sm-offset-3 col-md-8 col-md-offset-1 main"  style=" margin-top: 40px;">
-        	<div class = "jumbotron">
-        	 		<form class="navbar-form navbar-left" action="${pageContext.request.contextPath}/search" method="post">                
-        	 			<input type="hidden" name=clicksma value="${smaClick}">   
-					<input type="hidden" name="timePeriod" value="${time}">
-                 	<input type="hidden" name=company value="${company}">  	            		
-	            		<button type="submit" class="btn btn-default" name="weekly" value="${company}">Weekly</button>
-	            		<button type="submit" class="btn btn-default" name="monthly" value="${company}">Monthly</button>
-		            <button type="submit" class="btn btn-default" name="quarterly" value="${company}">Quarterly</button>
-	                <button type="submit" class="btn btn-default" name="half_year" value="${company}">Half Yearly</button>
-	            		<button type="submit" class="btn btn-default" name="yearly" value="${company}">Yearly</button>
-	            		
-          		</form>
-        	</div>
-       
+        
           <div class="jumbotron" style=" margin-top: 40px;">
           		<h2 style = "text-align: center;"><c:out value="${company}" /></h2>
    				 <div align="center" id="linechart_material" style="width: 550px; height: 400px; left: 0; right:0; margin: auto"></div>
@@ -288,11 +275,11 @@
    				 
                  <form class="navbar-form navbar-left" action="${pageContext.request.contextPath}/search" method="post">           
                       
-	            		<button type="submit" class="btn btn-default" name="time_period" value="yearly">Yearly</button>
-	            		<button type="submit" class="btn btn-default" name="time_period" value="half_yearly">Half Yearly</button>
-		            <button type="submit" class="btn btn-default" name="time_period" value="quarterly">Quarterly</button>
-	            		<button type="submit" class="btn btn-default" name="time_period" value="monthly">Monthly</button>
-	            		<button type="submit" class="btn btn-default" name="time_period" value="weekly">Weekly</button>
+	            		<button type="submit" class="btn btn-default" name="time_period" value="YEARLY">Yearly</button>
+	            		<button type="submit" class="btn btn-default" name="time_period" value="HALF_YEARLY">Half Yearly</button>
+		            <button type="submit" class="btn btn-default" name="time_period" value="QUARTERLY">Quarterly</button>
+	            		<button type="submit" class="btn btn-default" name="time_period" value="MONTHLY">Monthly</button>
+	            		<button type="submit" class="btn btn-default" name="time_period" value="WEEKLY">Weekly</button>
 	            		
 	            		<input type=hidden name="company" value="${company}">
 	            		

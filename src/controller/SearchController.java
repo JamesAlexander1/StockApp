@@ -16,9 +16,9 @@ import dao.QuarterlyClosingPriceDAO;
 import dao.SectorPerformDAO;
 import dao.WeekClosingPriceDAO;
 import dao.YearlyClosingPriceDAO;
-import dao.macdChart;
-import dao.rsiChart;
-import dao.smaChart;
+import dao.MACDChartDAO;
+import dao.RSIChartDAO;
+import dao.SMAChartDAO;
 
 import factory.dao.DataPriceDAOFactory;
 import factory.dao.IDAOFactory;
@@ -49,7 +49,7 @@ public class SearchController extends HttpServlet{
             
         	    
         	    
-        	    dao = daoFactory.instantiateDAO("yearly");
+        	    dao = daoFactory.instantiateDAO("YEARLY");
         	    
         	    request.setAttribute("company", code);
 
