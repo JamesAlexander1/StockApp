@@ -29,4 +29,7 @@ public class IndicatorDAOFactory implements ISpecificTimeDAOFactory<DataAndPrice
         }
     }
 
+    public static IndicatorDAOFactory getInstance() {
+        return new IndicatorDAOFactory();
+    }
 }

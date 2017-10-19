@@ -22,10 +22,14 @@ import dao.SMAChartDAO;
 
 import factory.dao.DataPriceDAOFactory;
 import factory.dao.IDAOFactory;
+import factory.dao.ISpecificTimeDAOFactory;
+import factory.dao.IndicatorDAOFactory;
+import factory.dao.MacdDAOFactory;
 import model.DateClosingPricePoint;
+import model.MACDDateClosingPrice;
 import model.NumeratedTimePeriods;
 
-import jdk.management.resource.ResourceRequest;
+
 
 @WebServlet("/search")
 public class SearchController extends HttpServlet{
@@ -35,7 +39,13 @@ public class SearchController extends HttpServlet{
     private SectorPerformDAO sectorDao = new SectorPerformDAO("https://www.alphavantage.co/query?function=SECTOR&apikey=CR72JXL4TE7T2WF4");
   
     private IDAOFactory<DataAndPriceDAO<DateClosingPricePoint>> daoFactory = DataPriceDAOFactory.getInstance();
+    private ISpecificTimeDAOFactory<DataAndPriceDAO<DateClosingPricePoint>> indicatorFactory = IndicatorDAOFactory.getInstance();
+    private MacdDAOFactory macdFactory = MacdDAOFactory.getInstance();
+    
     private DataAndPriceDAO<DateClosingPricePoint> dao = null;
+    private DataAndPriceDAO<DateClosingPricePoint> rsiDao = null;
+    private DataAndPriceDAO<DateClosingPricePoint> smaDao = null;
+    private DataAndPriceDAO<MACDDateClosingPrice> macdDao = null;
     
     
     
@@ -50,11 +60,18 @@ public class SearchController extends HttpServlet{
         	    
         	    
         	    dao = daoFactory.instantiateDAO("YEARLY");
+        	    rsiDao = indicatorFactory.instantiateDAO("RSI", NumeratedTimePeriods.YEARLY.name());
+        	    smaDao = indicatorFactory.instantiateDAO("SMA", NumeratedTimePeriods.YEARLY.name());
+        	    macdDao = macdFactory.instantiateDAO(NumeratedTimePeriods.YEARLY.name());
         	    
         	    request.setAttribute("company", code);
-
+        	    request.setAttribute("time", NumeratedTimePeriods.YEARLY.name());
+        	    
             request.setAttribute("yearly_list", dao.queryData(code));
-            request.setAttribute("time", NumeratedTimePeriods.YEARLY.getValue());
+            request.setAttribute("rsi_chart", rsiDao.queryData(code));
+            request.setAttribute("macd_chart", macdDao.queryData(code));
+            request.setAttribute("sma_chart", smaDao.queryData(code));
+            
         //otherwise they must've pressed a time period button
         } else {
             

@@ -5,14 +5,13 @@ import java.util.ArrayList;
 import http.StringJsonURL;
 import json_parser.macdDaily;
 import json_parser.macdWeek;
-import json_parser.rsiDaily;
-import json_parser.rsiWeek;
-import model.DateClosingPricePoint;
 import model.DatePricePoint;
 import model.NumeratedTimePeriods;
-import model.macdDateClosingPrice;
+import model.MACDDateClosingPrice;
 
-public class MACDChartDAO implements DataAndPriceDAO<macdDateClosingPrice>{
+public class MACDChartDAO implements DataAndPriceDAO<MACDDateClosingPrice>{
+    
+    
 	private static String URL = "https://www.alphavantage.co/query?function=MACD&symbol=";
     private static String KEY = "&apikey=CR72JXL4TE7T2WF4";
     private static String OPTIONSWEEKLY = "&interval=weekly&time_period=10";
@@ -25,7 +24,7 @@ public class MACDChartDAO implements DataAndPriceDAO<macdDateClosingPrice>{
     		timePeriod = time;
     }
     
-    public  ArrayList<DatePricePoint<macdDateClosingPrice>> queryData(String companyCode) {
+    public  ArrayList<DatePricePoint<MACDDateClosingPrice>> queryData(String companyCode) {
         
     		if (timePeriod.equals(NumeratedTimePeriods.YEARLY.name()) || timePeriod.equals(NumeratedTimePeriods.HALF_YEARLY.name())) {
     		    

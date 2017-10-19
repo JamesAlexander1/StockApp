@@ -3,14 +3,14 @@ package model;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
-public class macdDateClosingPrice implements DatePricePoint<macdDateClosingPrice>{
+public class MACDDateClosingPrice implements DatePricePoint<MACDDateClosingPrice>{
 	private GregorianCalendar shortDate;
     private Double macdPrice;
     private Double macdHistPrice;
     private Double macdSignalPrice;
     
     
-    public macdDateClosingPrice(GregorianCalendar newDate, Double macd, Double macdHist, Double macdSignal){
+    public MACDDateClosingPrice(GregorianCalendar newDate, Double macd, Double macdHist, Double macdSignal){
         
         shortDate = newDate;
         macdPrice = macd;
@@ -52,7 +52,7 @@ public class macdDateClosingPrice implements DatePricePoint<macdDateClosingPrice
         return shortDate.get(Calendar.DAY_OF_MONTH);
     }
     @Override
-    public int compareTo(macdDateClosingPrice o) {
+    public int compareTo(MACDDateClosingPrice o) {
         
         return o.getDate().get(Calendar.DAY_OF_MONTH) - this.shortDate.get(Calendar.DAY_OF_MONTH);
     }

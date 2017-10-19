@@ -48,26 +48,13 @@
     function drawChart() {
       var dataYearly = new google.visualization.DataTable();
       
-     <c:choose>
-     <c:when test="${not empty sma_chart}">
      
-     		dataYearly.addColumn('date', 'Date');
-        		dataYearly.addColumn('number', 'Price');
-        		dataYearly.addColumn('number', 'SMA');
-	     <c:forEach items="${sma_chart}" varStatus="element">
-	   			dataYearly.addRow([new Date(<c:out value="${yearly_list[element.index].year}"/> ,<c:out value="${yearly_list[element.index].month}"/>, 
-	   					<c:out value="${yearly_list[element.index].day}"/> ), <c:out value="${yearly_list[element.index].price}"/>, 
-	   					<c:out value="${sma_chart[element.index].price}"/>]);
-	   	 </c:forEach>
-     </c:when>
-     <c:otherwise>
-     		dataYearly.addColumn('date', 'Date');
-			dataYearly.addColumn('number', 'Price');
+     	dataYearly.addColumn('date', 'Date');
+		dataYearly.addColumn('number', 'Price');
      	<c:forEach items="${yearly_list}" varStatus="element">
 			dataYearly.addRow([new Date(<c:out value="${yearly_list[element.index].year}"/> ,<c:out value="${yearly_list[element.index].month}"/>, <c:out value="${yearly_list[element.index].day}"/> ), <c:out value="${yearly_list[element.index].price}"/>]);
 	 	</c:forEach>
-     </c:otherwise>  	 		
-  	 </c:choose>
+   
       
       
       var optionsYearly = {
@@ -102,6 +89,59 @@
      
      var chartYearly = new google.charts.Line(document.getElementById('linechart_material'));
      chartYearly.draw(dataYearly, google.charts.Line.convertOptions(optionsYearly));
+     
+     //sma chart
+     
+     var smaChart = new google.visualization.DataTable();
+      
+     
+     
+    		dataYearly.addColumn('date', 'Date');
+     	dataYearly.addColumn('number', 'Price');
+       	dataYearly.addColumn('number', 'SMA');
+       	
+     	<c:forEach items="${sma_chart}" varStatus="element">
+   			dataYearly.addRow([new Date(<c:out value="${yearly_list[element.index].year}"/> ,<c:out value="${yearly_list[element.index].month}"/>, 
+   			<c:out value="${yearly_list[element.index].day}"/> ), <c:out value="${yearly_list[element.index].price}"/>, 
+   			<c:out value="${sma_chart[element.index].price}"/>]);
+   	 	</c:forEach>
+    
+      
+      
+      var smaOptions = {
+              title: 'Stock Price Performance',
+              //curveType: 'function',
+              legend: { position: 'bottom' },
+              backgroundColor: '#303030',
+              legendTextStyle: { color: '#FFF' },
+              titleTextStyle: { color: '#FFF' },
+              hAxis: {
+                  title: "Date",
+                  titleTextStyle:{color: '#FFF'},
+                  textStyle:{color: '#FFF'}
+              },
+              vAxis: {
+                  title: "Stock Price in $USD",
+                  titleTextStyle:{color: '#FFF'},
+                  textStyle:{color: '#FFF'},
+                  format: 'decimal'
+                 
+                  
+              },
+              opacity: 0.8,
+              series: {
+                  
+                  0: { color: '#3BB9FF' },
+                  1: { color: '#6CC417' }
+              }
+          };
+
+     
+     
+     var chartYearly = new google.charts.Line(document.getElementById('sma_chart_graph'));
+     chartYearly.draw(dataYearly, google.charts.Line.convertOptions(smaOptions));
+     
+     //
      
      //rsi chart
      var rsiChart = new google.visualization.DataTable();
@@ -286,11 +326,24 @@
           		</form>
 
 		  </div>
+		  
+		  <div class="jumbotron" style=" margin-top: 40px;">
+          		<h2 style = "text-align: center;"><c:out value="${company}" /></h2>
+   				 <div align="center" id="linechart_material" style="width: 550px; height: 400px; left: 0; right:0; margin: auto"></div>
+                 
+		  </div>
+		  
+		  <div class="jumbotron" style=" margin-top: 40px;">
+          		<h2 style = "text-align: center;"><c:out value="${company}" /></h2>
+   				 <div align="center" id="sma_chart_graph" style="width: 700px; height: 500px; left: 0; right:0; margin: auto"></div>
+                 
+		  </div>
+		  
 		  <div class="jumbotron" style=" margin-top: 40px;">
           		<h2 style = "text-align: center;"><c:out value="Technical Indicators" /></h2>
    				 <div align="center" id="rsi_chart_graph" style="width: 550px; height: 400px; left: 0; right:0; margin: auto"></div>
-                 <form class="navbar-form navbar-left" action="${pageContext.request.contextPath}/search" method="post">  
-<!-- 
+            <!--      <form class="navbar-form navbar-left" action="${pageContext.request.contextPath}/search" method="post">  
+
                  	<input type="hidden" name="enum_time" value="${time}">              
 	            		<button type="submit" class="btn btn-default" name="sma_company" value="${company}">Simple Moving Average</button>
 =======
@@ -305,8 +358,8 @@
 					    		<button type="submit" class="btn btn-default" name="sma" value="${company}">Simple Moving Average</button>
 					    </c:otherwise>
 					</c:choose>          
->>>>>>> origin/tech-indicator -->
-          		</form>
+>>>>>>> origin/tech-indicator 
+          		</form> -->
 		  </div>
 		   <div class="jumbotron" style=" margin-top: 40px;">
           		<h2 style = "text-align: center;"><c:out value="${company}" /></h2>
