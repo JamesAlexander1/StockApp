@@ -7,9 +7,9 @@ import json_parser.macdDaily;
 import json_parser.macdWeek;
 import model.DatePricePoint;
 import model.NumeratedTimePeriods;
-import model.MACDDateClosingPrice;
+import model.macdDateClosingPrice;
 
-public class MACDChartDAO implements DataAndPriceDAO<MACDDateClosingPrice>{
+public class MACDChartDAO implements DataAndPriceDAO<macdDateClosingPrice>{
     
     
 	private static String URL = "https://www.alphavantage.co/query?function=MACD&symbol=";
@@ -24,7 +24,7 @@ public class MACDChartDAO implements DataAndPriceDAO<MACDDateClosingPrice>{
     		timePeriod = time;
     }
     
-    public  ArrayList<DatePricePoint<MACDDateClosingPrice>> queryData(String companyCode) {
+    public  ArrayList<DatePricePoint<macdDateClosingPrice>> queryData(String companyCode) {
         
     		if (timePeriod.equals(NumeratedTimePeriods.YEARLY.name()) || timePeriod.equals(NumeratedTimePeriods.HALF_YEARLY.name())) {
     		    
