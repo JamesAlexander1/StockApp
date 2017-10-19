@@ -96,14 +96,14 @@
       
      
      
-    		dataYearly.addColumn('date', 'Date');
-     	dataYearly.addColumn('number', 'Price');
-       	dataYearly.addColumn('number', 'SMA');
+    		smaChart.addColumn('date', 'Date');
+     	
+       	smaChart.addColumn('number', 'SMA');
        	
      	<c:forEach items="${sma_chart}" varStatus="element">
-   			dataYearly.addRow([new Date(<c:out value="${yearly_list[element.index].year}"/> ,<c:out value="${yearly_list[element.index].month}"/>, 
-   			<c:out value="${yearly_list[element.index].day}"/> ), <c:out value="${yearly_list[element.index].price}"/>, 
-   			<c:out value="${sma_chart[element.index].price}"/>]);
+   			smaChart.addRow([new Date(<c:out value="${sma_chart[element.index].year}"/> ,<c:out value="${sma_chart[element.index].month}"/>, 
+   			<c:out value="${sma_chart[element.index].day}"/> ), <c:out value="${sma_chart[element.index].price}"/>]);
+   			
    	 	</c:forEach>
     
       
@@ -121,7 +121,7 @@
                   textStyle:{color: '#FFF'}
               },
               vAxis: {
-                  title: "Stock Price in $USD",
+                  title: "SMA value in $USD",
                   titleTextStyle:{color: '#FFF'},
                   textStyle:{color: '#FFF'},
                   format: 'decimal'
@@ -131,15 +131,16 @@
               opacity: 0.8,
               series: {
                   
-                  0: { color: '#3BB9FF' },
+          	  	  0: { color: '#3BB9FF' },
                   1: { color: '#6CC417' }
+                  
               }
           };
 
      
      
-     var chartYearly = new google.charts.Line(document.getElementById('sma_chart_graph'));
-     chartYearly.draw(dataYearly, google.charts.Line.convertOptions(smaOptions));
+     var smaChartDraw = new google.charts.Line(document.getElementById('sma_chart_graph'));
+     smaChartDraw.draw(smaChart, google.charts.Line.convertOptions(smaOptions));
      
      //
      
@@ -309,7 +310,7 @@
         <div class="col-sm-6 col-sm-offset-3 col-md-8 col-md-offset-1 main"  style=" margin-top: 40px;">
         
           <div class="jumbotron" style=" margin-top: 40px;">
-          		<h2 style = "text-align: center;"><c:out value="${company}" /></h2>
+          		<h2 style = "text-align: center;"><c:out value="${company} : Closing Price" /></h2>
    				 <div align="center" id="linechart_material" style="width: 550px; height: 400px; left: 0; right:0; margin: auto"></div>
 
    				 
@@ -326,21 +327,15 @@
           		</form>
 
 		  </div>
-		  
+	  
 		  <div class="jumbotron" style=" margin-top: 40px;">
-          		<h2 style = "text-align: center;"><c:out value="${company}" /></h2>
-   				 <div align="center" id="linechart_material" style="width: 550px; height: 400px; left: 0; right:0; margin: auto"></div>
-                 
-		  </div>
-		  
-		  <div class="jumbotron" style=" margin-top: 40px;">
-          		<h2 style = "text-align: center;"><c:out value="${company}" /></h2>
+          		<h2 style = "text-align: center;"><c:out value="${company} : SMA " /></h2>
    				 <div align="center" id="sma_chart_graph" style="width: 700px; height: 500px; left: 0; right:0; margin: auto"></div>
                  
 		  </div>
 		  
 		  <div class="jumbotron" style=" margin-top: 40px;">
-          		<h2 style = "text-align: center;"><c:out value="Technical Indicators" /></h2>
+          		<h2 style = "text-align: center;"><c:out value="${company} : RSI " /></h2>
    				 <div align="center" id="rsi_chart_graph" style="width: 550px; height: 400px; left: 0; right:0; margin: auto"></div>
             <!--      <form class="navbar-form navbar-left" action="${pageContext.request.contextPath}/search" method="post">  
 
@@ -362,7 +357,7 @@
           		</form> -->
 		  </div>
 		   <div class="jumbotron" style=" margin-top: 40px;">
-          		<h2 style = "text-align: center;"><c:out value="${company}" /></h2>
+          		<h2 style = "text-align: center;"><c:out value="${company} : MACD" /></h2>
    				 <div align="center" id="macd_chart_graph" style="width: 700px; height: 500px; left: 0; right:0; margin: auto"></div>
                  
 		  </div>
