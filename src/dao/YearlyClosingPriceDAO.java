@@ -15,8 +15,11 @@ public class YearlyClosingPriceDAO implements DataAndPriceDAO<DateClosingPricePo
 
     @Override
     public  ArrayList<DatePricePoint<DateClosingPricePoint>> queryData(String companyCode) {
-        
-        return YearlyClosingPriceParser.parseJson(new StringJsonURL(URL + companyCode + KEY).getResponse());
+        try {
+        	return YearlyClosingPriceParser.parseJson(new StringJsonURL(URL + companyCode + KEY).getResponse());
+        } catch (Exception e) {
+        	return new ArrayList<DatePricePoint<DateClosingPricePoint>>();
+        }
     }
 
 }

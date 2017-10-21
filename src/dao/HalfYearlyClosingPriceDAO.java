@@ -15,8 +15,11 @@ public class HalfYearlyClosingPriceDAO implements DataAndPriceDAO<DateClosingPri
 
     @Override
     public  ArrayList<DatePricePoint<DateClosingPricePoint>> queryData(String companyCode) {
-        
-        return HalfYearlyClosingPriceParser.parseJson(new StringJsonURL(URL + companyCode + KEY).getResponse());
+        try {
+        	return HalfYearlyClosingPriceParser.parseJson(new StringJsonURL(URL + companyCode + KEY).getResponse());
+        } catch (Exception e) {
+        	return new ArrayList<DatePricePoint<DateClosingPricePoint>>();
+        }
     }
 
 }

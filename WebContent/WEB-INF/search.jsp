@@ -12,7 +12,7 @@
 
 	<meta charset="UTF-8">
 	
-	<title>Hello</title>
+	<title>SandP 500 Price Charts</title>
 	<!-- HTML for web page -->
 	<!--  If we want to include javascript, we would store it in a .js file under WEB-INF and would reference it with a <script> tag
 	and call the js functions/code as needed in this html file  -->
@@ -36,191 +36,25 @@
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script type="text/javascript">
     google.charts.load('current', {'packages':['line']});
+    google.charts.load('current', {'packages':['corechart']});
     google.charts.setOnLoadCallback(drawChart);
-    
+    google.charts.setOnLoadCallback(drawVisualization);
+
     
     /*
-     * For now, just uncomment whichever graph you want to display. We need to add conditional statements
-     * depending on which time period the user wants.
+     * SearchController.java loads the relevant time period, search.jsp only has to load whatever it is given.
      */
     
     function drawChart() {
-        /*var data = new google.visualization.DataTable();
-        data.addColumn('date', 'Date');
-        data.addColumn('number', 'Price');
-        <c:forEach items="${week_list}" var="element">
-        	data.addRow([new Date(<c:out value="${element.year}"/> ,<c:out value="${element.month}"/>, <c:out value="${element.day}"/> ), <c:out value="${element.price}"/>]);
-        </c:forEach>
-        
-        var options = {
-                title: 'Stock Price Performance',
-                //curveType: 'function',
-                legend: { position: 'bottom' },
-                backgroundColor: '#303030',
-                legendTextStyle: { color: '#FFF' },
-                titleTextStyle: { color: '#FFF' },
-                hAxis: {
-                    title: "Date This Week",
-                    titleTextStyle:{color: '#FFF'},
-                    textStyle:{color: '#FFF'}
-                },
-                vAxis: {
-                    title: "Stock Price in $USD",
-                    titleTextStyle:{color: '#FFF'},
-                    textStyle:{color: '#FFF'},
-                    format: 'decimal'
-                   
-                    
-                },
-                opacity: 0.8,
-                series: {
-                    
-                    0: { color: '#3BB9FF' },
-                    1: { color: '#6CC417' }
-                }
-            };
-        
-        var chart = new google.charts.Line(document.getElementById('linechart_material'));
-        chart.draw(data, google.charts.Line.convertOptions(options));*/
-        
-        /*var dataMonth = new google.visualization.DataTable();
-        dataMonth.addColumn('date', 'Date');
-        dataMonth.addColumn('number', 'Price');
-        
-        <c:forEach items="${month_list}" var="element">
-    		dataMonth.addRow([new Date(<c:out value="${element.year}"/> ,<c:out value="${element.month}"/>, <c:out value="${element.day}"/> ), <c:out value="${element.price}"/>]);
-        </c:forEach>
-        
-        
-        
-        var optionsMonth = {
-                title: 'Stock Price Performance',
-                //curveType: 'function',
-                legend: { position: 'bottom' },
-                backgroundColor: '#303030',
-                legendTextStyle: { color: '#FFF' },
-                titleTextStyle: { color: '#FFF' },
-                hAxis: {
-                    title: "Date This Month",
-                    titleTextStyle:{color: '#FFF'},
-                    textStyle:{color: '#FFF'}
-                },
-                vAxis: {
-                    title: "Stock Price in $USD",
-                    titleTextStyle:{color: '#FFF'},
-                    textStyle:{color: '#FFF'},
-                    format: 'decimal'
-                   
-                    
-                },
-                opacity: 0.8,
-                series: {
-                    
-                    0: { color: '#3BB9FF' },
-                    1: { color: '#6CC417' }
-                }
-            };
-
-       
-       
-       var chartMonth = new google.charts.Line(document.getElementById('linechart_material'));
-       chartMonth.draw(dataMonth, google.charts.Line.convertOptions(optionsMonth));*/
-       
-       
-    	/*var dataQuarterly = new google.visualization.DataTable();
-        dataQuarterly.addColumn('date', 'Date');
-        dataQuarterly.addColumn('number', 'Price');
-        
-        <c:forEach items="${quarterly_list}" var="element">
-    		dataQuarterly.addRow([new Date(<c:out value="${element.year}"/> ,<c:out value="${element.month}"/>, <c:out value="${element.day}"/> ), <c:out value="${element.price}"/>]);
-        </c:forEach>
-        
-        
-        
-        var optionsQuarterly = {
-                title: 'Stock Price Performance',
-                //curveType: 'function',
-                legend: { position: 'bottom' },
-                backgroundColor: '#303030',
-                legendTextStyle: { color: '#FFF' },
-                titleTextStyle: { color: '#FFF' },
-                hAxis: {
-                    title: "Date This Quarter",
-                    titleTextStyle:{color: '#FFF'},
-                    textStyle:{color: '#FFF'}
-                },
-                vAxis: {
-                    title: "Stock Price in $USD",
-                    titleTextStyle:{color: '#FFF'},
-                    textStyle:{color: '#FFF'},
-                    format: 'decimal'
-                   
-                    
-                },
-                opacity: 0.8,
-                series: {
-                    
-                    0: { color: '#3BB9FF' },
-                    1: { color: '#6CC417' }
-                }
-            };
-
-       
-       
-       var chartQuarterly = new google.charts.Line(document.getElementById('linechart_material'));
-       chartQuarterly.draw(dataQuarterly, google.charts.Line.convertOptions(optionsQuarterly));*/
-       
-       /*var dataHalfYearly = new google.visualization.DataTable();
-       dataHalfYearly.addColumn('date', 'Date');
-       dataHalfYearly.addColumn('number', 'Price');
-       
-       <c:forEach items="${halfYearly_list}" var="element">
-   			dataHalfYearly.addRow([new Date(<c:out value="${element.year}"/> ,<c:out value="${element.month}"/>, <c:out value="${element.day}"/> ), <c:out value="${element.price}"/>]);
-   	   </c:forEach>
-       
-       
-       
-       var optionsHalfYearly = {
-               title: 'Stock Price Performance',
-               //curveType: 'function',
-               legend: { position: 'bottom' },
-               backgroundColor: '#303030',
-               legendTextStyle: { color: '#FFF' },
-               titleTextStyle: { color: '#FFF' },
-               hAxis: {
-                   title: "Date This Half Year",
-                   titleTextStyle:{color: '#FFF'},
-                   textStyle:{color: '#FFF'}
-               },
-               vAxis: {
-                   title: "Stock Price in $USD",
-                   titleTextStyle:{color: '#FFF'},
-                   textStyle:{color: '#FFF'},
-                   format: 'decimal'
-                  
-                   
-               },
-               opacity: 0.8,
-               series: {
-                   
-                   0: { color: '#3BB9FF' },
-                   1: { color: '#6CC417' }
-               }
-           };
-
-      
-      
-      var chartHalfYearly = new google.charts.Line(document.getElementById('linechart_material'));
-      chartHalfYearly.draw(dataHalfYearly, google.charts.Line.convertOptions(optionsHalfYearly));*/
-      
       var dataYearly = new google.visualization.DataTable();
-      dataYearly.addColumn('date', 'Date');
-      dataYearly.addColumn('number', 'Price');
       
-      <c:forEach items="${yearly_list}" var="element">
-  			dataYearly.addRow([new Date(<c:out value="${element.year}"/> ,<c:out value="${element.month}"/>, <c:out value="${element.day}"/> ), <c:out value="${element.price}"/>]);
-  	   </c:forEach>
-      
+     
+     	dataYearly.addColumn('date', 'Date');
+		dataYearly.addColumn('number', 'Price');
+     	<c:forEach items="${yearly_list}" varStatus="element">
+			dataYearly.addRow([new Date(<c:out value="${yearly_list[element.index].year}"/> ,<c:out value="${yearly_list[element.index].month}"/>, <c:out value="${yearly_list[element.index].day}"/> ), <c:out value="${yearly_list[element.index].price}"/>]);
+	 	</c:forEach>
+   
       
       
       var optionsYearly = {
@@ -231,7 +65,7 @@
               legendTextStyle: { color: '#FFF' },
               titleTextStyle: { color: '#FFF' },
               hAxis: {
-                  title: "Date This Year",
+                  title: "Date",
                   titleTextStyle:{color: '#FFF'},
                   textStyle:{color: '#FFF'}
               },
@@ -255,6 +89,147 @@
      
      var chartYearly = new google.charts.Line(document.getElementById('linechart_material'));
      chartYearly.draw(dataYearly, google.charts.Line.convertOptions(optionsYearly));
+     
+     //sma chart
+     
+     var smaChart = new google.visualization.DataTable();
+      
+     
+     
+    		smaChart.addColumn('date', 'Date');
+     	
+       	smaChart.addColumn('number', 'SMA');
+       	
+     	<c:forEach items="${sma_chart}" varStatus="element">
+   			smaChart.addRow([new Date(<c:out value="${sma_chart[element.index].year}"/> ,<c:out value="${sma_chart[element.index].month}"/>, 
+   			<c:out value="${sma_chart[element.index].day}"/> ), <c:out value="${sma_chart[element.index].price}"/>]);
+   			
+   	 	</c:forEach>
+    
+      
+      
+      var smaOptions = {
+              title: 'Stock Price Performance',
+              //curveType: 'function',
+              legend: { position: 'bottom' },
+              backgroundColor: '#303030',
+              legendTextStyle: { color: '#FFF' },
+              titleTextStyle: { color: '#FFF' },
+              hAxis: {
+                  title: "Date",
+                  titleTextStyle:{color: '#FFF'},
+                  textStyle:{color: '#FFF'}
+              },
+              vAxis: {
+                  title: "SMA value in $USD",
+                  titleTextStyle:{color: '#FFF'},
+                  textStyle:{color: '#FFF'},
+                  format: 'decimal'
+                 
+                  
+              },
+              opacity: 0.8,
+              series: {
+                  
+          	  	  0: { color: '#3BB9FF' },
+                  1: { color: '#6CC417' }
+                  
+              }
+          };
+
+     
+     
+     var smaChartDraw = new google.charts.Line(document.getElementById('sma_chart_graph'));
+     smaChartDraw.draw(smaChart, google.charts.Line.convertOptions(smaOptions));
+     
+     //
+     
+     //rsi chart
+     var rsiChart = new google.visualization.DataTable();
+		rsiChart.addColumn('date', 'Date');
+		rsiChart.addColumn('number', 'RSI');
+	<c:forEach items="${rsi_chart}" varStatus="element">
+		rsiChart.addRow([new Date(<c:out value="${rsi_chart[element.index].year}"/> ,<c:out value="${rsi_chart[element.index].month}"/>, <c:out value="${rsi_chart[element.index].day}"/> ), <c:out value="${rsi_chart[element.index].price}"/>]);
+	</c:forEach>
+
+	var rsiOptions = {
+	        title: 'RSI Chart',
+	        //curveType: 'function',
+	        legend: { position: 'bottom' },
+	        backgroundColor: '#303030',
+	        legendTextStyle: { color: '#FFF' },
+	        titleTextStyle: { color: '#FFF' },
+	        hAxis: {
+	            title: "Date",
+	            titleTextStyle:{color: '#FFF'},
+	            textStyle:{color: '#FFF'}
+	        },
+	        vAxis: {
+	            title: "Stock Price in $USD",
+	            titleTextStyle:{color: '#FFF'},
+	            textStyle:{color: '#FFF'},
+	            format: 'decimal'
+	           
+	            
+	        },
+	        opacity: 0.8,
+	        series: {
+	            
+	            0: { color: '#3BB9FF' },
+	            1: { color: '#6CC417' }
+	        }
+	    };
+	
+	
+	
+	var rsiChartDraw = new google.charts.Line(document.getElementById('rsi_chart_graph'));
+	rsiChartDraw.draw(rsiChart, google.charts.Line.convertOptions(rsiOptions));
+	
+
+    
+    }
+    
+    function drawVisualization() {
+    	//macd chart
+        var macdChart = new google.visualization.DataTable();
+   		macdChart.addColumn('date', 'Date');
+   		macdChart.addColumn('number', 'MACD');
+   		macdChart.addColumn('number', 'MACD HIST');
+   		macdChart.addColumn('number', 'MACD SIGNAL');
+
+   	<c:forEach items="${macd_chart}" varStatus="element">
+   		macdChart.addRow([new Date(<c:out value="${macd_chart[element.index].year}"/> ,<c:out value="${macd_chart[element.index].month}"/>, <c:out value="${macd_chart[element.index].day}"/> ), <c:out value="${macd_chart[element.index].macdPrice}"/>, <c:out value="${macd_chart[element.index].macdHistPrice}"/>, <c:out value="${macd_chart[element.index].macdSignalPrice}"/>]);
+   	</c:forEach>
+
+   	var macdOptions = {
+   	        title: 'MACD Chart',
+   	        //curveType: 'function',
+   	        legend: { position: 'bottom' },
+   	        backgroundColor: '#303030',
+   	        legendTextStyle: { color: '#FFF' },
+   	        titleTextStyle: { color: '#FFF' },
+   	        hAxis: {
+   	            title: "Date",
+   	            titleTextStyle:{color: '#FFF'},
+   	            textStyle:{color: '#FFF'}
+   	        },
+   	        vAxis: {
+   	            title: "Stock Price in $USD",
+   	            titleTextStyle:{color: '#FFF'},
+   	            textStyle:{color: '#FFF'},
+   	            format: 'decimal'
+   	           
+   	            
+   	        },
+   	        opacity: 0.8,
+   	        seriesType: 'bars',
+   	        series: {0: {type: 'line'}, 2:{type:'line'}, 1:{type:'area'}}
+   	    };
+   	
+   	
+   	
+   	var macdChartDraw = new google.visualization.ComboChart(document.getElementById('macd_chart_graph'));
+   	macdChartDraw.draw(macdChart, google.charts.Line.convertOptions(macdOptions));
     }
 </script>
 <!--  -->
@@ -333,18 +308,66 @@
             </div>
         </div>
         <div class="col-sm-6 col-sm-offset-3 col-md-8 col-md-offset-1 main"  style=" margin-top: 40px;">
+        
           <div class="jumbotron" style=" margin-top: 40px;">
-			  <!-- <h2>Welcome to StockApp</h2>
-			  <p>The best S&amp;P 500 Stock Application ever designed. Search your favourite stocks by market code and customise search results for a variety of indices and performance indicators.</p>
-		   width: 900px; height: 500px;
-		   -->
-          		<h2 style = "text-align: center;"><c:out value="${company}" /></h2>
+          		<h2 style = "text-align: center;"><c:out value="${company} : Closing Price" /></h2>
    				 <div align="center" id="linechart_material" style="width: 550px; height: 400px; left: 0; right:0; margin: auto"></div>
-        	
-			 
-		  </div>
+		  <form class="navbar-form navbar-left" action="${pageContext.request.contextPath}/compare" method="post">
+            <input type="text" name="companyCompare" class="form-control" placeholder="Compare...">
+            <input type=hidden name="company" value="${company}">
+            <input type=hidden name="companyCompare" value="${companyCompare}">
+            <button type="submit" class="btn btn-default">Compare</button>
+          </form>
+   				 
+                 <form class="navbar-form navbar-left" action="${pageContext.request.contextPath}/search" method="post">           
+                      
+	            		<button type="submit" class="btn btn-default" name="time_period" value="YEARLY">Yearly</button>
+	            		<button type="submit" class="btn btn-default" name="time_period" value="HALF_YEARLY">Half Yearly</button>
+		            <button type="submit" class="btn btn-default" name="time_period" value="QUARTERLY">Quarterly</button>
+	            		<button type="submit" class="btn btn-default" name="time_period" value="MONTHLY">Monthly</button>
+	            		<button type="submit" class="btn btn-default" name="time_period" value="WEEKLY">Weekly</button>
+	            		
+	            		<input type=hidden name="company" value="${company}">
+	            		
+          		</form>
 
-          
+		  </div>
+	  
+		  <div class="jumbotron" style=" margin-top: 40px;">
+          		<h2 style = "text-align: center;"><c:out value="${company} : SMA " /></h2>
+   				 <div align="center" id="sma_chart_graph" style="width: 700px; height: 500px; left: 0; right:0; margin: auto"></div>
+                 
+		  </div>
+		  
+		  <div class="jumbotron" style=" margin-top: 40px;">
+          		<h2 style = "text-align: center;"><c:out value="${company} : RSI " /></h2>
+   				 <div align="center" id="rsi_chart_graph" style="width: 550px; height: 400px; left: 0; right:0; margin: auto"></div>
+            <!--      <form class="navbar-form navbar-left" action="${pageContext.request.contextPath}/search" method="post">  
+
+                 	<input type="hidden" name="enum_time" value="${time}">              
+	            		<button type="submit" class="btn btn-default" name="sma_company" value="${company}">Simple Moving Average</button>
+=======
+                 	<input type="hidden" name="timePeriod" value="${time}">
+                 	<input type="hidden" name=company value="${company}">  
+                 	<input type="hidden" name=clicksma value="${smaClick}">  
+                 	<c:choose>
+					    <c:when test="${not empty smaClick}">
+					    		<button type="submit" class="btn btn-default" name="removesma" value="${company}">Remove Simple Moving Average</button>					    
+					    </c:when>
+					    <c:otherwise>
+					    		<button type="submit" class="btn btn-default" name="sma" value="${company}">Simple Moving Average</button>
+					    </c:otherwise>
+					</c:choose>          
+>>>>>>> origin/tech-indicator 
+          		</form> -->
+		  </div>
+		   <div class="jumbotron" style=" margin-top: 40px;">
+          		<h2 style = "text-align: center;"><c:out value="${company} : MACD" /></h2>
+   				 <div align="center" id="macd_chart_graph" style="width: 700px; height: 500px; left: 0; right:0; margin: auto"></div>
+                 
+		  </div>
+		
+
         </div>
       </div>
     </div>
