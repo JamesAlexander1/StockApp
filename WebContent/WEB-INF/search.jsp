@@ -312,7 +312,12 @@
           <div class="jumbotron" style=" margin-top: 40px;">
           		<h2 style = "text-align: center;"><c:out value="${company} : Closing Price" /></h2>
    				 <div align="center" id="linechart_material" style="width: 550px; height: 400px; left: 0; right:0; margin: auto"></div>
-
+		  <form class="navbar-form navbar-left" action="${pageContext.request.contextPath}/compare" method="post">
+            <input type="text" name="companyCompare" class="form-control" placeholder="Compare...">
+            <input type=hidden name="company" value="${company}">
+            <input type=hidden name="companyCompare" value="${companyCompare}">
+            <button type="submit" class="btn btn-default">Compare</button>
+          </form>
    				 
                  <form class="navbar-form navbar-left" action="${pageContext.request.contextPath}/search" method="post">           
                       
