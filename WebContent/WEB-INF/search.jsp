@@ -37,30 +37,7 @@
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script type="text/javascript">
 
-	//Carousel js.
-	$(document).ready( function() {
-	    $('#myCarousel').carousel({
-			interval:   4000
-		});
-		
-		var clickEvent = false;
-		$('#myCarousel').on('click', '.nav a', function() {
-				clickEvent = true;
-				$('.nav li').removeClass('active');
-				$(this).parent().addClass('active');		
-		}).on('slid.bs.carousel', function(e) {
-			if(!clickEvent) {
-				var count = $('.nav').children().length -1;
-				var current = $('.nav li.active');
-				current.removeClass('active').next().addClass('active');
-				var id = parseInt(current.data('slide-to'));
-				if(count == id) {
-					$('.nav li').first().addClass('active');	
-				}
-			}
-			clickEvent = false;
-		});
-	});
+	
 	
 	//
 	
@@ -260,6 +237,34 @@
    	var macdChartDraw = new google.visualization.ComboChart(document.getElementById('macd_chart_graph'));
    	macdChartDraw.draw(macdChart, google.charts.Line.convertOptions(macdOptions));
     }
+    
+   	   //Carousel js.
+   	 	$(document).ready( function() {
+   	 	    $('#myCarousel').carousel({
+   	 			interval:   4000
+   	 		});
+   	 		
+   	 		var clickEvent = false;
+   	 		$('#myCarousel').on('click', '.nav a', function() {
+   	 				clickEvent = true;
+   	 				$('.nav li').removeClass('active');
+   	 				$(this).parent().addClass('active');		
+   	 		}).on('slid.bs.carousel', function(e) {
+   	 			if(!clickEvent) {
+   	 				var count = $('.nav').children().length -1;
+   	 				var current = $('.nav li.active');
+   	 				current.removeClass('active').next().addClass('active');
+   	 				var id = parseInt(current.data('slide-to'));
+   	 				if(count == id) {
+   	 					$('.nav li').first().addClass('active');	
+   	 				}
+   	 			}
+   	 			clickEvent = false;
+   	 			drawChart();
+   	 			drawVisualization();
+   	 			
+   	 		});
+   	 	});
 </script>
 <!--  -->
 
@@ -339,7 +344,7 @@
         <div class="col-sm-6 col-sm-offset-3 col-md-8 col-md-offset-1 main"  style=" margin-top: 40px;">
         
         	<!-- Testing  -->
-        	<div class="jumbotron" style=" margin-top: 40px;">
+        	<div class="jumbotron" style=" margin-top: 40px; width: 1000px; height: 800px;">
         		<div class="container">
 			    <div id="myCarousel" class="carousel slide" data-ride="carousel">
 			    
@@ -347,109 +352,90 @@
 			      <div class="carousel-inner">
 			      
 			        <div class="item active">
-			          
-			           <div class="carousel-caption">
-			            <h3>Headline</h3>
-			            <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. <a href="http://sevenx.de/demo/bootstrap-carousel/" target="_blank" class="label label-danger">Bootstrap 3 - Carousel Collection</a></p>
-			          </div>
+			          	
+		          			<h2 style = "text-align: center;"><c:out value="${company} : Closing Price" /></h2>
+		   					<div align="center" id="linechart_material" style="width: 700px; height: 500px; left: 0; right:0; margin: auto"></div>
+							  
+			
+					 
+					  
+			           
 			        </div><!-- End Item -->
 			 
-			         <div class="item">
-			        
-			           <div class="carousel-caption">
-			            <h3>Headline</h3>
-			            <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. <a href="http://sevenx.de/demo/bootstrap-carousel/" target="_blank" class="label label-danger">Bootstrap 3 - Carousel Collection</a></p>
-			          </div>
+					<div class="item">
+			        		
+			            
+			          		<h2 style = "text-align: center;"><c:out value="${company} : SMA " /></h2>
+			   				<div align="center" id="sma_chart_graph" style="width: 700px; height: 500px; left: 0; right:0; margin: auto"></div>
+			                 
+			  		
+						
 			        </div><!-- End Item -->
 			        
-			        <div class="item">
-			          
-			           <div class="carousel-caption">
-			            <h3>Headline</h3>
-			            <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. <a href="http://sevenx.de/demo/bootstrap-carousel/" target="_blank" class="label label-danger">Bootstrap 3 - Carousel Collection</a></p>
-			          </div>
-			        </div><!-- End Item -->
+					<div class="item">
+					  	
+          						<h2 style = "text-align: center;"><c:out value="${company} : RSI " /></h2>
+   				 				<div align="center" id="rsi_chart_graph" style="width: 700px; height: 500px; left: 0; right:0; margin: auto"></div>
+				   		
+					   
+					   		
+					</div><!-- End Item -->
 			        
 			        <div class="item">
 			          <!-- place graph here -->
-			           <div class="carousel-caption">
-			            <h3>Headline</h3>
-			            <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.</p>
-			          </div>
+			           
+			           
+			           
+			          		<h2 style = "text-align: center;"><c:out value="${company} : MACD" /></h2>
+			   				<div align="center" id="macd_chart_graph" style="width: 700px; height: 500px; left: 0; right:0; margin: auto"></div>
+			                 
+					
+			           
 			        </div><!-- End Item -->
 			                
 			      </div><!-- End Carousel Inner -->
 			
-			
-			    	<ul class="nav nav-pills nav-justified">
-			          <li data-target="#myCarousel" data-slide-to="0" class="active"><a href="#">About<small>Lorem ipsum dolor sit</small></a></li>
-			          <li data-target="#myCarousel" data-slide-to="1"><a href="#">Projects<small>Lorem ipsum dolor sit</small></a></li>
-			          <li data-target="#myCarousel" data-slide-to="2"><a href="#">Portfolio<small>Lorem ipsum dolor sit</small></a></li>
-			          <li data-target="#myCarousel" data-slide-to="3"><a href="#">Services<small>Lorem ipsum dolor sit</small></a></li>
-			        </ul>
+				<ul class="nav nav-pills nav-justified">
+			          <li data-target="#myCarousel" data-slide-to="0" class="active"><a href="#">Closing Price<small>Chart of Closing Price of Stock</small></a></li>
+			          <li data-target="#myCarousel" data-slide-to="1" ><a href="#">SMA<small>SMA Chart</small></a></li>
+			          <li data-target="#myCarousel" data-slide-to="2" ><a href="#">RSI<small>RSI Chart</small></a></li>
+			          <li data-target="#myCarousel" data-slide-to="3" ><a href="#">MACD<small>MACD Chart</small></a></li>
+		        </ul>
+			    	
 			
 			
 			    </div><!-- End Carousel -->
-			</div>
+			    </div>
+			    
+			    
+			    
+			
         	</div>
         	<!-- Testing  -->
-          <div class="jumbotron" style=" margin-top: 40px;">
-          		<h2 style = "text-align: center;"><c:out value="${company} : Closing Price" /></h2>
-   				 <div align="center" id="linechart_material" style="width: 550px; height: 400px; left: 0; right:0; margin: auto"></div>
-		  <form class="navbar-form navbar-left" action="${pageContext.request.contextPath}/compare" method="post">
+        	<form class="navbar-form navbar-left" action="${pageContext.request.contextPath}/compare" method="post">
             <input type="text" name="companyCompare" class="form-control" placeholder="Compare...">
             <input type=hidden name="company" value="${company}">
             <input type=hidden name="companyCompare" value="${companyCompare}">
             <button type="submit" class="btn btn-default">Compare</button>
-          </form>
-   				 
-                 <form class="navbar-form navbar-left" action="${pageContext.request.contextPath}/search" method="post">           
-                      
-	            		<button type="submit" class="btn btn-default" name="time_period" value="YEARLY">Yearly</button>
-	            		<button type="submit" class="btn btn-default" name="time_period" value="HALF_YEARLY">Half Yearly</button>
-		            <button type="submit" class="btn btn-default" name="time_period" value="QUARTERLY">Quarterly</button>
-	            		<button type="submit" class="btn btn-default" name="time_period" value="MONTHLY">Monthly</button>
-	            		<button type="submit" class="btn btn-default" name="time_period" value="WEEKLY">Weekly</button>
-	            		
-	            		<input type=hidden name="company" value="${company}">
-	            		
-          		</form>
-
-		  </div>
+        </form>
+ 				 
+        <form class="navbar-form navbar-left" action="${pageContext.request.contextPath}/search" method="post">           
+                    
+        		<button type="submit" class="btn btn-default" name="time_period" value="YEARLY">Yearly</button>
+        		<button type="submit" class="btn btn-default" name="time_period" value="HALF_YEARLY">Half Yearly</button>
+       		<button type="submit" class="btn btn-default" name="time_period" value="QUARTERLY">Quarterly</button>
+        		<button type="submit" class="btn btn-default" name="time_period" value="MONTHLY">Monthly</button>
+        		<button type="submit" class="btn btn-default" name="time_period" value="WEEKLY">Weekly</button>
+         		
+        		<input type=hidden name="company" value="${company}">
+           		
+		</form>
+         
 	  
-		  <div class="jumbotron" style=" margin-top: 40px;">
-          		<h2 style = "text-align: center;"><c:out value="${company} : SMA " /></h2>
-   				 <div align="center" id="sma_chart_graph" style="width: 700px; height: 500px; left: 0; right:0; margin: auto"></div>
-                 
-		  </div>
 		  
-		  <div class="jumbotron" style=" margin-top: 40px;">
-          		<h2 style = "text-align: center;"><c:out value="${company} : RSI " /></h2>
-   				 <div align="center" id="rsi_chart_graph" style="width: 550px; height: 400px; left: 0; right:0; margin: auto"></div>
-            <!--      <form class="navbar-form navbar-left" action="${pageContext.request.contextPath}/search" method="post">  
-
-                 	<input type="hidden" name="enum_time" value="${time}">              
-	            		<button type="submit" class="btn btn-default" name="sma_company" value="${company}">Simple Moving Average</button>
-=======
-                 	<input type="hidden" name="timePeriod" value="${time}">
-                 	<input type="hidden" name=company value="${company}">  
-                 	<input type="hidden" name=clicksma value="${smaClick}">  
-                 	<c:choose>
-					    <c:when test="${not empty smaClick}">
-					    		<button type="submit" class="btn btn-default" name="removesma" value="${company}">Remove Simple Moving Average</button>					    
-					    </c:when>
-					    <c:otherwise>
-					    		<button type="submit" class="btn btn-default" name="sma" value="${company}">Simple Moving Average</button>
-					    </c:otherwise>
-					</c:choose>          
->>>>>>> origin/tech-indicator 
-          		</form> -->
-		  </div>
-		   <div class="jumbotron" style=" margin-top: 40px;">
-          		<h2 style = "text-align: center;"><c:out value="${company} : MACD" /></h2>
-   				 <div align="center" id="macd_chart_graph" style="width: 700px; height: 500px; left: 0; right:0; margin: auto"></div>
-                 
-		  </div>
+		  
+		  
+		   
 		
 
         </div>
