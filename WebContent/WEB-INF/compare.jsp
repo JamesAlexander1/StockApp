@@ -134,9 +134,11 @@
         <div class="col-sm-3 col-md-2 sidebar" style=" margin-top: 20px;">
           <ul class="nav nav-sidebar">
             <li class="active"><a href="#">Overview <span class="sr-only">(current)</span></a></li>
-            <li><a href="#" class="text-info">Reports</a></li>
-            <li><a href="#" class="text-info">Analytics</a></li>
-            <li><a href="#" class="text-info">Export</a></li>
+            <form class="navbar-form navbar-left" action="${pageContext.request.contextPath}/compare" method="post">
+            	<input type=hidden name="company" value="MSFT">
+	            <input type=hidden name="companyCompare" value="GOOG">
+            	<button type="compare" class="btn btn-default">Compare</button>
+            </form>
           </ul>
 
           <div class="table-responsive">
@@ -172,6 +174,14 @@
         <div class="col-sm-6 col-sm-offset-3 col-md-8 col-md-offset-1 main"  style=" margin-top: 40px;">
         
           <div class="jumbotron" style=" margin-top: 40px;">
+          		<form class="navbar-form navbar-left" action="${pageContext.request.contextPath}/compare" method="post">
+          			<input type="text" name="company" class="form-control" placeholder="Company 1">
+		            <input type="text" name="companyCompare" class="form-control" placeholder="Company 2">
+		            <input type=hidden name="company" value="${company}">
+		            <input type=hidden name="companyCompare" value="${companyCompare}">
+		            <button type="submit" class="btn btn-default">Compare</button>
+	          	</form>
+          
           		<h2 style = "text-align: center;"><c:out value="${company} and ${companyCompare}: Closing Price" /></h2>
    				 <div align="center" id="linechart_material" style="width: 550px; height: 400px; left: 0; right:0; margin: auto"></div>
 
@@ -185,7 +195,8 @@
 	            		<button type="submit" class="btn btn-default" name="time_period" value="WEEKLY">Weekly</button>
 	            		
 	            		<input type=hidden name="company" value="${company}">
-    	            		<input type=hidden name="companyCompare" value="${companyCompare}">
+		           		<input type=hidden name="companyCompare" value="${companyCompare}">
+	            		
 	            		
           		</form>
 

@@ -272,9 +272,11 @@
         <div class="col-sm-3 col-md-2 sidebar" style=" margin-top: 20px;">
           <ul class="nav nav-sidebar">
             <li class="active"><a href="#">Overview <span class="sr-only">(current)</span></a></li>
-            <li><a href="#" class="text-info">Reports</a></li>
-            <li><a href="#" class="text-info">Analytics</a></li>
-            <li><a href="#" class="text-info">Export</a></li>
+            <form class="navbar-form navbar-left" action="${pageContext.request.contextPath}/compare" method="post">
+            	<input type=hidden name="company" value="MSFT">
+	            <input type=hidden name="companyCompare" value="GOOG">
+            	<button type="compare" class="btn btn-default">Compare</button>
+            </form>
           </ul>
 
           <div class="table-responsive">
