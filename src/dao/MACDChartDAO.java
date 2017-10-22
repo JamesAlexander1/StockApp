@@ -5,11 +5,16 @@ import java.util.ArrayList;
 import http.StringJsonURL;
 import json_parser.macdDaily;
 import json_parser.macdWeek;
+
 import model.DatePricePoint;
 import model.NumeratedTimePeriods;
-import model.MacdDateClosingPrice;
 
-public class MACDChartDAO implements DataAndPriceDAO<MacdDateClosingPrice>{
+
+import model.DateClosingPricePoint;
+import model.macdDateClosingPrice;
+
+public class MACDChartDAO implements DataAndPriceDAO<macdDateClosingPrice>{
+
     
     
 	private static String URL = "https://www.alphavantage.co/query?function=MACD&symbol=";
@@ -24,16 +29,22 @@ public class MACDChartDAO implements DataAndPriceDAO<MacdDateClosingPrice>{
     		timePeriod = time;
     }
     
-    public  ArrayList<DatePricePoint<MacdDateClosingPrice>> queryData(String companyCode) {
+
+    public  ArrayList<DatePricePoint<macdDateClosingPrice>> queryData(String companyCode) {
         
     		if (timePeriod.equals(NumeratedTimePeriods.YEARLY.name()) || timePeriod.equals(NumeratedTimePeriods.HALF_YEARLY.name())) {
-    		    
-        		return macdWeek.parseJson(new StringJsonURL(URL + companyCode + OPTIONSWEEKLY + TYPE + KEY).getResponse(), timePeriod);
-        		
+    		    try {
+        			return macdWeek.parseJson(new StringJsonURL(URL + companyCode + OPTIONSWEEKLY + TYPE + KEY).getResponse(), timePeriod);
+    		    } catch (Exception e) {
+    	        	return new ArrayList<DatePricePoint<macdDateClosingPrice>>();
+    	        }
     		} else {
-    		    
-        		return macdDaily.parseJson(new StringJsonURL(URL + companyCode + OPTIONSDAILY + TYPE + KEY).getResponse(), timePeriod);
-        		
+    		    try {
+    		    	return macdDaily.parseJson(new StringJsonURL(URL + companyCode + OPTIONSDAILY + TYPE + KEY).getResponse(), timePeriod);
+    		    } catch (Exception e) {
+    	        	return new ArrayList<DatePricePoint<macdDateClosingPrice>>();
+    	        }
+
     		}
     }
 }

@@ -27,10 +27,28 @@ public class RSIChartDAO implements DataAndPriceDAO<DateClosingPricePoint>  {
 	    
 	    @Override
 	    public  ArrayList<DatePricePoint<DateClosingPricePoint>> queryData(String companyCode) {
+	        
 	    		if (timePeriod.equals(NumeratedTimePeriods.YEARLY.name()) || timePeriod.equals(NumeratedTimePeriods.HALF_YEARLY.name())) {
-	        		return rsiWeek.parseJson(new StringJsonURL(URL + companyCode + OPTIONSWEEKLY + TYPE + KEY).getResponse(), timePeriod);
+
+	    		    try {
+	    				return rsiWeek.parseJson(new StringJsonURL(URL + companyCode + OPTIONSWEEKLY + TYPE + KEY).getResponse(), timePeriod);
+	    				
+		    		}catch (Exception e) {
+		    		    
+		            	return new ArrayList<DatePricePoint<DateClosingPricePoint>>();
+		            	
+	            }
+	    		    
 	    		} else {
-	        		return rsiDaily.parseJson(new StringJsonURL(URL + companyCode + OPTIONSDAILY + TYPE + KEY).getResponse(), timePeriod);
-	    		}
+	    		    
+	    			try{
+	    			    
+	        			return rsiDaily.parseJson(new StringJsonURL(URL + companyCode + OPTIONSDAILY + TYPE + KEY).getResponse(), timePeriod);
+	    			} catch (Exception e) {
+	    			    
+	    	        	    return new ArrayList<DatePricePoint<DateClosingPricePoint>>();
+	    	        }
+    			}
+
 	    }
 }

@@ -15,8 +15,11 @@ public class MonthClosingPriceDAO implements DataAndPriceDAO<DateClosingPricePoi
 
     @Override
     public  ArrayList<DatePricePoint<DateClosingPricePoint>> queryData(String companyCode) {
-        
-        return MonthlyClosingPriceParser.parseJson(new StringJsonURL(URL + companyCode + KEY).getResponse());
+        try {
+        	return MonthlyClosingPriceParser.parseJson(new StringJsonURL(URL + companyCode + KEY).getResponse());
+        } catch (Exception e) {
+        	return new ArrayList<DatePricePoint<DateClosingPricePoint>>();
+        }
     }
 
 }

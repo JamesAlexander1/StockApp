@@ -10,23 +10,17 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import dao.DataAndPriceDAO;
-import dao.HalfYearlyClosingPriceDAO;
-import dao.MonthClosingPriceDAO;
-import dao.QuarterlyClosingPriceDAO;
+
 import dao.SectorPerformDAO;
-import dao.WeekClosingPriceDAO;
-import dao.YearlyClosingPriceDAO;
-import dao.MACDChartDAO;
-import dao.RSIChartDAO;
-import dao.SMAChartDAO;
+
 
 import factory.dao.DataPriceDAOFactory;
 import factory.dao.IDAOFactory;
-import factory.dao.ISpecificTimeDAOFactory;
-import factory.dao.IndicatorDAOFactory;
-import factory.dao.MacdDAOFactory;
+
 import model.DateClosingPricePoint;
-import model.MacdDateClosingPrice;
+
+
+
 import model.NumeratedTimePeriods;
 
 
@@ -51,15 +45,25 @@ public class compareController extends HttpServlet{
 
         String compareCode = request.getParameter("companyCompare");
         String originalCode = request.getParameter("company");
-        System.out.println(compareCode + " " + originalCode);
+
         //default graph is the yearly graph when the user just enters the code through the search bar.
         if (compareCode != null) {
+            
             String time_period = request.getParameter("time_period");
+            
             if (time_period != null) {
+                
             		originalChart = daoFactory.instantiateDAO(time_period);
 	     	    compareChart = seconddaoFactory.instantiateDAO(time_period);
 	
-	     	    
+	     	    if (originalChart.queryData(originalCode).isEmpty() || compareChart.queryData(compareCode).isEmpty()) {
+	     	        
+        	     	    	request.setAttribute("sector_list", sectorDao.sectorQuery());
+        	     	    	RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/" + "error.jsp");
+        	     	    	rd.forward(request, response);
+        	     	    	return;
+	     	    }
+
 	     	  
 	     	    request.setAttribute("time", time_period);
 		     	    
@@ -67,17 +71,27 @@ public class compareController extends HttpServlet{
 		        request.setAttribute("second_yearly_list", compareChart.queryData(compareCode));
 		        request.setAttribute("company", originalCode);
 	     	    request.setAttribute("companyCompare", compareCode);
+	     	    
+	     	    
             } else {
 	        	 	originalChart = daoFactory.instantiateDAO("YEARLY");
 	     	    compareChart = seconddaoFactory.instantiateDAO("YEARLY");
-	
+    
+	     	   if(originalChart.queryData(originalCode).isEmpty() || compareChart.queryData(compareCode).isEmpty()) {
+	     	       
+        	     	    	request.setAttribute("sector_list", sectorDao.sectorQuery());
+        	     	    	RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/" + "error.jsp");
+        	     	    	rd.forward(request, response);
+        	     	    	return;
+	     	    }
+
 	     	    
-	     	   request.setAttribute("company", originalCode);
-	     	    request.setAttribute("companyCompare", compareCode);
-	     	    request.setAttribute("time", NumeratedTimePeriods.YEARLY.name());
+     	       request.setAttribute("company", originalCode);
+	     	   request.setAttribute("companyCompare", compareCode);
+	     	   request.setAttribute("time", NumeratedTimePeriods.YEARLY.name());
 		     	    
-	            request.setAttribute("yearly_list", originalChart.queryData(originalCode));
-		        request.setAttribute("second_yearly_list", compareChart.queryData(compareCode));
+	           request.setAttribute("yearly_list", originalChart.queryData(originalCode));
+	           request.setAttribute("second_yearly_list", compareChart.queryData(compareCode));
             }
         	   
         	   

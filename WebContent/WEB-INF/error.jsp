@@ -37,7 +37,7 @@
 
 <body>
 	
-	<nav class="navbar navbar-default navbar-fixed-top">
+	<nav class="navbar navbar-default navbar-fixed-top" style=" margin-bottom: 40px;">
       <div class="container-fluid" >
         <div class="navbar-header">
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -66,10 +66,6 @@
 
     <div class="container-fluid">
       <div class="row">
-<<<<<<< HEAD
-        <div class="col-sm-3 col-md-2 sidebar" style=" margin-top: 55px;">
-          
-=======
         <div class="col-sm-3 col-md-2 sidebar" style=" margin-top: 20px;">
           <ul class="nav nav-sidebar">
             <li class="active"><a href="#">Overview <span class="sr-only">(current)</span></a></li>
@@ -79,7 +75,6 @@
             	<button type="compare" class="btn btn-default">Compare</button>
             </form>
           </ul>
->>>>>>> origin/comparison_page
           <div class="table-responsive">
             <table class="table table-striped">
               <thead>
@@ -115,8 +110,7 @@
         <div class="col-sm-6 col-sm-offset-3 col-md-8 col-md-offset-1 main"  style=" margin-top: 40px;">
         
           <div class="jumbotron" style=" margin-top: 40px;">
-			  <h2>Welcome to StockApp</h2>
-			  <p>Find price charts of all S&amp;P500 stocks on StockApp! Search and compare your favourite stocks and compare your favourite stocks by market code. View price charts and technical charts from different time periods for all stocks on the S&amp;P500.</p>
+			  <h2>There is an error in your search. Please make sure you typed in the code correctly.</h2>
 				
 		
 		  </div>

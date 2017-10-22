@@ -11,7 +11,19 @@ import javax.servlet.http.HttpServletResponse;
 
 import dao.DataAndPriceDAO;
 
+
 import dao.SectorPerformDAO;
+
+
+import dao.HalfYearlyClosingPriceDAO;
+import dao.MonthClosingPriceDAO;
+import dao.QuarterlyClosingPriceDAO;
+import dao.SectorPerformDAO;
+import dao.WeekClosingPriceDAO;
+import dao.YearlyClosingPriceDAO;
+import dao.MACDChartDAO;
+import dao.RSIChartDAO;
+import dao.SMAChartDAO;
 
 
 import factory.dao.DataPriceDAOFactory;
@@ -20,7 +32,9 @@ import factory.dao.ISpecificTimeDAOFactory;
 import factory.dao.IndicatorDAOFactory;
 import factory.dao.MacdDAOFactory;
 import model.DateClosingPricePoint;
-import model.MacdDateClosingPrice;
+
+import model.macdDateClosingPrice;
+
 import model.NumeratedTimePeriods;
 
 
@@ -39,7 +53,9 @@ public class SearchController extends HttpServlet{
     private DataAndPriceDAO<DateClosingPricePoint> dao = null;
     private DataAndPriceDAO<DateClosingPricePoint> rsiDao = null;
     private DataAndPriceDAO<DateClosingPricePoint> smaDao = null;
-    private DataAndPriceDAO<MacdDateClosingPrice> macdDao = null;
+
+    private DataAndPriceDAO<macdDateClosingPrice> macdDao = null;
+
     
     
     
@@ -50,14 +66,21 @@ public class SearchController extends HttpServlet{
         
         //default graph is the yearly graph when the user just enters the code through the search bar.
         if (code != null) {
-            
-        	    
-        	    
+
         	    dao = daoFactory.instantiateDAO("YEARLY");
         	    rsiDao = indicatorFactory.instantiateDAO("RSI", NumeratedTimePeriods.YEARLY.name());
         	    smaDao = indicatorFactory.instantiateDAO("SMA", NumeratedTimePeriods.YEARLY.name());
         	    macdDao = macdFactory.instantiateDAO(NumeratedTimePeriods.YEARLY.name());
         	    
+        	    if (dao.queryData(code).isEmpty() || rsiDao.queryData(code).isEmpty() 
+        	    		|| smaDao.queryData(code).isEmpty() || macdDao.queryData(code).isEmpty()) {
+        	        request.setAttribute("sector_list", sectorDao.sectorQuery());
+        	        RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/" + "error.jsp");
+        	        rd.forward(request, response);
+        	        return;
+        	    }
+        	    
+
         	    request.setAttribute("company", code);
         	    request.setAttribute("time", NumeratedTimePeriods.YEARLY.name());
         	    
@@ -71,12 +94,23 @@ public class SearchController extends HttpServlet{
             
             String company = request.getParameter("company");
             String time_period = request.getParameter("time_period");
+
         
             dao = daoFactory.instantiateDAO(time_period);
             rsiDao = indicatorFactory.instantiateDAO("RSI", time_period);
             smaDao = indicatorFactory.instantiateDAO("SMA", time_period);
             macdDao = macdFactory.instantiateDAO(time_period);
             
+            
+
+            if (dao.queryData(company).isEmpty() || rsiDao.queryData(company).isEmpty() 
+                    || smaDao.queryData(company).isEmpty() || macdDao.queryData(company).isEmpty()) {
+                
+                    request.setAttribute("sector_list", sectorDao.sectorQuery());
+                    RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/" + "error.jsp");
+                    rd.forward(request, response);
+                    return;
+            }
             request.setAttribute("company", company);  
             request.setAttribute("time", time_period);
             
@@ -87,8 +121,8 @@ public class SearchController extends HttpServlet{
             
 
         }
+
         
-	    	
         request.setAttribute("sector_list", sectorDao.sectorQuery());
         RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/" + "search.jsp");
         rd.forward(request, response);

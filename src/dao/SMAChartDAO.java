@@ -3,10 +3,6 @@ package dao;
 import java.util.ArrayList;
 
 import http.StringJsonURL;
-
-
-
-
 import json_parser.smaDaily;
 
 import json_parser.smaWeek;
@@ -33,11 +29,20 @@ public class SMAChartDAO implements DataAndPriceDAO<DateClosingPricePoint> {
     public  ArrayList<DatePricePoint<DateClosingPricePoint>> queryData(String companyCode) {
         
     		if (timePeriod.equals(NumeratedTimePeriods.YEARLY.name()) || timePeriod.equals(NumeratedTimePeriods.HALF_YEARLY.name())) {
-    		    
-        		return smaWeek.parseJson(new StringJsonURL(URL + companyCode + OPTIONSWEEKLY + TYPE + KEY).getResponse(), timePeriod);
+
+    		    try {
+        			return smaWeek.parseJson(new StringJsonURL(URL + companyCode + OPTIONSWEEKLY + TYPE + KEY).getResponse(), timePeriod);
+    		    } catch (Exception e) {
+    		        return new ArrayList<DatePricePoint<DateClosingPricePoint>>();
+    	        }
         		
     		} else {
-        		return smaDaily.parseJson(new StringJsonURL(URL + companyCode + OPTIONSDAILY + TYPE + KEY).getResponse(), timePeriod);
+        		try {
+    				return smaDaily.parseJson(new StringJsonURL(URL + companyCode + OPTIONSDAILY + TYPE + KEY).getResponse(), timePeriod);
+        		} catch (Exception e) {
+                	return new ArrayList<DatePricePoint<DateClosingPricePoint>>();
+            }
+
     		}
     }
 
