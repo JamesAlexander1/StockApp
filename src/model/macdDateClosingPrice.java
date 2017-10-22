@@ -1,10 +1,13 @@
 package model;
 
+
+
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 public class macdDateClosingPrice implements DatePricePoint<macdDateClosingPrice>{
-	private GregorianCalendar shortDate;
+
+    private GregorianCalendar shortDate;
     private Double macdPrice;
     private Double macdHistPrice;
     private Double macdSignalPrice;
@@ -66,5 +69,4 @@ public class macdDateClosingPrice implements DatePricePoint<macdDateClosingPrice
         // TODO Auto-generated method stub
         
     }
-
 }
