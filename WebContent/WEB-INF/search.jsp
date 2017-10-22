@@ -378,6 +378,7 @@
 	        	<div class="jumbotron" style=" margin-top: 30px;">
 	        	
 	        		<!-- Comparison Form -->
+     		    <h2 style = "text-align: center;"><c:out value="${company}" /></h2>
         		
 	        		<form class="navbar-form navbar-left" action="${pageContext.request.contextPath}/compare" method="post">
 	        		

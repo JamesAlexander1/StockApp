@@ -164,7 +164,7 @@
             </table>
             </div>
             
-            <form class="navbar-form navbar-left" action="${pageContext.request.contextPath}/search" method="post" style=" margin-top: 5px;">           
+            <form class="navbar-form navbar-left" action="${pageContext.request.contextPath}/compare" method="post" style=" margin-top: 5px;">           
 	                    
 		        		<button type="submit" class="btn btn-default" name="time_period" value="YEARLY">Yearly</button>
 		        		<button type="submit" class="btn btn-default" name="time_period" value="HALF_YEARLY" style=" margin-top: 5px;">Half Yearly</button>
@@ -173,6 +173,7 @@
 		        		<button type="submit" class="btn btn-default" name="time_period" value="WEEKLY" style=" margin-top: 5px;">Weekly</button>
 		         		
 		        		<input type=hidden name="company" value="${company}">
+		        		<input type=hidden name="companyCompare" value="${companyCompare}">
 	           		
 			</form>
             
