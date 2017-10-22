@@ -52,7 +52,6 @@
      */
     
     function drawChart() {
-<<<<<<< HEAD
 	    var dataYearly = new google.visualization.DataTable();
 	    
 	   
@@ -149,195 +148,7 @@
 	     
 	     var smaChartDraw = new google.charts.Line(document.getElementById('sma_chart_graph'));
 	     smaChartDraw.draw(smaChart, google.charts.Line.convertOptions(smaOptions));
-     
-     
-=======
-      var dataYearly = new google.visualization.DataTable();
-      
-     
-     	dataYearly.addColumn('date', 'Date');
-		dataYearly.addColumn('number', 'Price');
-     	<c:forEach items="${yearly_list}" varStatus="element">
-			dataYearly.addRow([new Date(<c:out value="${yearly_list[element.index].year}"/> ,<c:out value="${yearly_list[element.index].month}"/>, <c:out value="${yearly_list[element.index].day}"/> ), <c:out value="${yearly_list[element.index].price}"/>]);
-	 	</c:forEach>
-   
-      
-      
-      var optionsYearly = {
-              title: 'Stock Price Performance',
-              //curveType: 'function',
-              legend: { position: 'bottom' },
-              backgroundColor: '#303030',
-              legendTextStyle: { color: '#FFF' },
-              titleTextStyle: { color: '#FFF' },
-              hAxis: {
-                  title: "Date",
-                  titleTextStyle:{color: '#FFF'},
-                  textStyle:{color: '#FFF'}
-              },
-              vAxis: {
-                  title: "Stock Price in $USD",
-                  titleTextStyle:{color: '#FFF'},
-                  textStyle:{color: '#FFF'},
-                  format: 'decimal'
-                 
-                  
-              },
-              opacity: 0.8,
-              series: {
-                  
-                  0: { color: '#3BB9FF' },
-                  1: { color: '#6CC417' }
-              }
-          };
-
-     
-     
-     var chartYearly = new google.charts.Line(document.getElementById('linechart_material'));
-     chartYearly.draw(dataYearly, google.charts.Line.convertOptions(optionsYearly));
-     
-     //sma chart
-     
-     var smaChart = new google.visualization.DataTable();
-      
-     
-     
-    		smaChart.addColumn('date', 'Date');
-     	
-       	smaChart.addColumn('number', 'SMA');
-       	
-     	<c:forEach items="${sma_chart}" varStatus="element">
-   			smaChart.addRow([new Date(<c:out value="${sma_chart[element.index].year}"/> ,<c:out value="${sma_chart[element.index].month}"/>, 
-   			<c:out value="${sma_chart[element.index].day}"/> ), <c:out value="${sma_chart[element.index].price}"/>]);
-   			
-   	 	</c:forEach>
-    
-      
-      
-      var smaOptions = {
-              title: 'Stock Price Performance',
-              //curveType: 'function',
-              legend: { position: 'bottom' },
-              backgroundColor: '#303030',
-              legendTextStyle: { color: '#FFF' },
-              titleTextStyle: { color: '#FFF' },
-              hAxis: {
-                  title: "Date",
-                  titleTextStyle:{color: '#FFF'},
-                  textStyle:{color: '#FFF'}
-              },
-              vAxis: {
-                  title: "SMA value in $USD",
-                  titleTextStyle:{color: '#FFF'},
-                  textStyle:{color: '#FFF'},
-                  format: 'decimal'
-                 
-                  
-              },
-              opacity: 0.8,
-              series: {
-                  
-          	  	  0: { color: '#3BB9FF' },
-                  1: { color: '#6CC417' }
-                  
-              }
-          };
-
-     
-     
-     var smaChartDraw = new google.charts.Line(document.getElementById('sma_chart_graph'));
-     smaChartDraw.draw(smaChart, google.charts.Line.convertOptions(smaOptions));
-     
-     //
-     
-     //rsi chart
-     var rsiChart = new google.visualization.DataTable();
-		rsiChart.addColumn('date', 'Date');
-		rsiChart.addColumn('number', 'RSI');
-	<c:forEach items="${rsi_chart}" varStatus="element">
-		rsiChart.addRow([new Date(<c:out value="${rsi_chart[element.index].year}"/> ,<c:out value="${rsi_chart[element.index].month}"/>, <c:out value="${rsi_chart[element.index].day}"/> ), <c:out value="${rsi_chart[element.index].price}"/>]);
-	</c:forEach>
-
-	var rsiOptions = {
-	        title: 'RSI Chart',
-	        //curveType: 'function',
-	        legend: { position: 'bottom' },
-	        backgroundColor: '#303030',
-	        legendTextStyle: { color: '#FFF' },
-	        titleTextStyle: { color: '#FFF' },
-	        hAxis: {
-	            title: "Date",
-	            titleTextStyle:{color: '#FFF'},
-	            textStyle:{color: '#FFF'}
-	        },
-	        vAxis: {
-	            title: "Stock Price in $USD",
-	            titleTextStyle:{color: '#FFF'},
-	            textStyle:{color: '#FFF'},
-	            format: 'decimal'
-	           
-	            
-	        },
-	        opacity: 0.8,
-	        series: {
-	            
-	            0: { color: '#3BB9FF' },
-	            1: { color: '#6CC417' }
-	        }
-	    };
-	
-	
-	
-	var rsiChartDraw = new google.charts.Line(document.getElementById('rsi_chart_graph'));
-	rsiChartDraw.draw(rsiChart, google.charts.Line.convertOptions(rsiOptions));
-	
-
-    
-    }
-    
-    function drawVisualization() {
-    	//macd chart
-        var macdChart = new google.visualization.DataTable();
-   		macdChart.addColumn('date', 'Date');
-   		macdChart.addColumn('number', 'MACD');
-   		macdChart.addColumn('number', 'MACD HIST');
-   		macdChart.addColumn('number', 'MACD SIGNAL');
-
-   	<c:forEach items="${macd_chart}" varStatus="element">
-   		macdChart.addRow([new Date(<c:out value="${macd_chart[element.index].year}"/> ,<c:out value="${macd_chart[element.index].month}"/>, <c:out value="${macd_chart[element.index].day}"/> ), <c:out value="${macd_chart[element.index].macdPrice}"/>, <c:out value="${macd_chart[element.index].macdHistPrice}"/>, <c:out value="${macd_chart[element.index].macdSignalPrice}"/>]);
-   	</c:forEach>
-
-   	var macdOptions = {
-   	        title: 'MACD Chart',
-   	        //curveType: 'function',
-   	        legend: { position: 'bottom' },
-   	        backgroundColor: '#303030',
-   	        legendTextStyle: { color: '#FFF' },
-   	        titleTextStyle: { color: '#FFF' },
-   	        hAxis: {
-   	            title: "Date",
-   	            titleTextStyle:{color: '#FFF'},
-   	            textStyle:{color: '#FFF'}
-   	        },
-   	        vAxis: {
-   	            title: "Stock Price in $USD",
-   	            titleTextStyle:{color: '#FFF'},
-   	            textStyle:{color: '#FFF'},
-   	            format: 'decimal'
-   	           
-   	            
-   	        },
-   	        opacity: 0.8,
-   	        seriesType: 'bars',
-   	        series: {0: {type: 'line'}, 2:{type:'line'}, 1:{type:'area'}}
-   	    };
-   	
-   	
-   	
-   	var macdChartDraw = new google.visualization.ComboChart(document.getElementById('macd_chart_graph'));
-   	macdChartDraw.draw(macdChart, google.charts.Line.convertOptions(macdOptions));
->>>>>>> origin/comparison_page
-    }
+     }
      
     // 
     function drawRsi() {
@@ -509,20 +320,9 @@
 
     <div class="container-fluid">
       <div class="row">
-<<<<<<< HEAD
+
         <div class="col-sm-3 col-md-2 sidebar" style=" margin-top: 40px;">
-          
-=======
-        <div class="col-sm-3 col-md-2 sidebar" style=" margin-top: 20px;">
-          <ul class="nav nav-sidebar">
-            <li class="active"><a href="#">Overview <span class="sr-only">(current)</span></a></li>
-            <form class="navbar-form navbar-left" action="${pageContext.request.contextPath}/compare" method="post">
-            	<input type=hidden name="company" value="MSFT">
-	            <input type=hidden name="companyCompare" value="GOOG">
-            	<button type="compare" class="btn btn-default">Compare</button>
-            </form>
-          </ul>
->>>>>>> origin/comparison_page
+
 
           <div class="table-responsive">
             <table class="table table-striped">
@@ -566,7 +366,7 @@
 	           		
 			</form>
         </div>
-<<<<<<< HEAD
+
         <div class="col-sm-6 col-sm-offset-3 col-md-8 col-md-offset-1 main" style=" margin-top: 30px;">
         		
         		
@@ -578,7 +378,7 @@
 	        	<div class="jumbotron" style=" margin-top: 30px;">
 	        	
 	        		<!-- Comparison Form -->
-     		    <h2 style = "text-align: center;"><c:out value="${company}" /></h2>
+     		    
         		
 	        		<form class="navbar-form navbar-left" action="${pageContext.request.contextPath}/compare" method="post">
 	        		
@@ -589,22 +389,7 @@
 		            
 	        		</form>
 			 	
-			 	
-			 	<!-- Different Time Period Intervals for Data -->
-			 	<!-- 
-			 	<div class="bs-component">
-              <div class="list-group">
-                <a href="#" class="list-group-item active">
-                  Cras justo odio
-                </a>
-                <a href="#" class="list-group-item">Dapibus ac facilisis in
-                </a>
-                <a href="#" class="list-group-item">Morbi leo risus
-                </a>
-              </div>
-            <div id="source-button" class="btn btn-primary btn-xs" style="display: none;">&lt; &gt;</div></div> -->
-	        		<!--  -->
-	        		
+			 
 	        		
         			<!-- Charts  -->
 	        		
@@ -678,69 +463,7 @@
 	        	</div>
 	        	<!-- End Jumbotron  -->
  
-=======
-        <div class="col-sm-6 col-sm-offset-3 col-md-8 col-md-offset-1 main"  style=" margin-top: 40px;">
-        
-          <div class="jumbotron" style=" margin-top: 40px;">
-          		<h2 style = "text-align: center;"><c:out value="${company} : Closing Price" /></h2>
-   				 <div align="center" id="linechart_material" style="width: 550px; height: 400px; left: 0; right:0; margin: auto"></div>
-		  <form class="navbar-form navbar-left" action="${pageContext.request.contextPath}/compare" method="post">
-            <input type="text" name="companyCompare" class="form-control" placeholder="Compare...">
-            <input type=hidden name="company" value="${company}">
-            <input type=hidden name="companyCompare" value="${companyCompare}">
-            <button type="submit" class="btn btn-default">Compare</button>
-          </form>
-   				 
-                 <form class="navbar-form navbar-left" action="${pageContext.request.contextPath}/search" method="post">           
-                      
-	            		<button type="submit" class="btn btn-default" name="time_period" value="YEARLY">Yearly</button>
-	            		<button type="submit" class="btn btn-default" name="time_period" value="HALF_YEARLY">Half Yearly</button>
-		            <button type="submit" class="btn btn-default" name="time_period" value="QUARTERLY">Quarterly</button>
-	            		<button type="submit" class="btn btn-default" name="time_period" value="MONTHLY">Monthly</button>
-	            		<button type="submit" class="btn btn-default" name="time_period" value="WEEKLY">Weekly</button>
-	            		
-	            		<input type=hidden name="company" value="${company}">
-	            		
-          		</form>
 
-		  </div>
-	  
-		  <div class="jumbotron" style=" margin-top: 40px;">
-          		<h2 style = "text-align: center;"><c:out value="${company} : SMA " /></h2>
-   				 <div align="center" id="sma_chart_graph" style="width: 700px; height: 500px; left: 0; right:0; margin: auto"></div>
-                 
-		  </div>
-		  
-		  <div class="jumbotron" style=" margin-top: 40px;">
-          		<h2 style = "text-align: center;"><c:out value="${company} : RSI " /></h2>
-   				 <div align="center" id="rsi_chart_graph" style="width: 550px; height: 400px; left: 0; right:0; margin: auto"></div>
-            <!--      <form class="navbar-form navbar-left" action="${pageContext.request.contextPath}/search" method="post">  
-
-                 	<input type="hidden" name="enum_time" value="${time}">              
-	            		<button type="submit" class="btn btn-default" name="sma_company" value="${company}">Simple Moving Average</button>
-=======
-                 	<input type="hidden" name="timePeriod" value="${time}">
-                 	<input type="hidden" name=company value="${company}">  
-                 	<input type="hidden" name=clicksma value="${smaClick}">  
-                 	<c:choose>
-					    <c:when test="${not empty smaClick}">
-					    		<button type="submit" class="btn btn-default" name="removesma" value="${company}">Remove Simple Moving Average</button>					    
-					    </c:when>
-					    <c:otherwise>
-					    		<button type="submit" class="btn btn-default" name="sma" value="${company}">Simple Moving Average</button>
-					    </c:otherwise>
-					</c:choose>          
->>>>>>> origin/tech-indicator 
-          		</form> -->
-		  </div>
-		   <div class="jumbotron" style=" margin-top: 40px;">
-          		<h2 style = "text-align: center;"><c:out value="${company} : MACD" /></h2>
-   				 <div align="center" id="macd_chart_graph" style="width: 700px; height: 500px; left: 0; right:0; margin: auto"></div>
-                 
-		  </div>
-		
-
->>>>>>> origin/comparison_page
         </div>
       </div>
     </div>
