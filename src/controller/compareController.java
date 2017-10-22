@@ -26,7 +26,7 @@ import factory.dao.ISpecificTimeDAOFactory;
 import factory.dao.IndicatorDAOFactory;
 import factory.dao.MacdDAOFactory;
 import model.DateClosingPricePoint;
-import model.MacdDateClosingPrice;
+import model.macdDateClosingPrice;
 import model.NumeratedTimePeriods;
 
 

@@ -50,7 +50,7 @@ public class DateClosingPricePoint implements DatePricePoint<DateClosingPricePoi
     
     @Override
     public Integer getMonth(){
-        return shortDate.get(Calendar.MONTH);
+        return shortDate.get(Calendar.MONTH) - 1;
     }
     
     @Override

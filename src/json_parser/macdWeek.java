@@ -10,15 +10,15 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
 import model.DatePricePoint;
-import model.MacdDateClosingPrice;
+import model.macdDateClosingPrice;
 import model.NumeratedTimePeriods;
 
 public class macdWeek {
     
-    public static ArrayList<DatePricePoint<MacdDateClosingPrice>> parseJson(String json, String period){
+    public static ArrayList<DatePricePoint<macdDateClosingPrice>> parseJson(String json, String period){
         
         
-        ArrayList<DatePricePoint<MacdDateClosingPrice>> list = new ArrayList<DatePricePoint<MacdDateClosingPrice>>();
+        ArrayList<DatePricePoint<macdDateClosingPrice>> list = new ArrayList<DatePricePoint<macdDateClosingPrice>>();
         list.ensureCapacity(50);
         
         JsonElement element = new JsonParser().parse(json);
@@ -48,7 +48,7 @@ public class macdWeek {
                 time[i] = Integer.parseInt(timeAsString[i]);
             }
             
-            list.add(new MacdDateClosingPrice(new GregorianCalendar(time[0], time[1], time[2]), entry.getValue().getAsJsonObject().get("MACD").getAsDouble(), 
+            list.add(new macdDateClosingPrice(new GregorianCalendar(time[0], time[1], time[2]), entry.getValue().getAsJsonObject().get("MACD").getAsDouble(), 
             		entry.getValue().getAsJsonObject().get("MACD_Hist").getAsDouble(), entry.getValue().getAsJsonObject().get("MACD_Signal").getAsDouble()));
             //System.out.println(entry.getValue().getAsJsonObject().get("SMA").getAsDouble());
             temp ++;
