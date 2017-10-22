@@ -37,7 +37,7 @@
 
 <body>
 	
-	<nav class="navbar navbar-default navbar-fixed-top" style=" margin-bottom: 40px;">
+	<nav class="navbar navbar-default navbar-fixed-top">
       <div class="container-fluid" >
         <div class="navbar-header">
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -66,13 +66,8 @@
 
     <div class="container-fluid">
       <div class="row">
-        <div class="col-sm-3 col-md-2 sidebar" style=" margin-top: 20px;">
-          <ul class="nav nav-sidebar">
-            <li class="active"><a href="#">Overview <span class="sr-only">(current)</span></a></li>
-            <li><a href="#" class="text-info">Reports</a></li>
-            <li><a href="#" class="text-info">Analytics</a></li>
-            <li><a href="#" class="text-info">Export</a></li>
-          </ul>
+        <div class="col-sm-3 col-md-2 sidebar" style=" margin-top: 55px;">
+          
           <div class="table-responsive">
             <table class="table table-striped">
               <thead>
@@ -109,7 +104,7 @@
         
           <div class="jumbotron" style=" margin-top: 40px;">
 			  <h2>Welcome to StockApp</h2>
-			  <p>The best S&amp;P 500 Stock Application ever designed. Search your favourite stocks by market code and customise search results for a variety of indices and performance indicators.</p>
+			  <p>Find price charts of all S&amp;P500 stocks on StockApp! Search and compare your favourite stocks and compare your favourite stocks by market code. View price charts and technical charts from different time periods for all stocks on the S&amp;P500.</p>
 				
 		
 		  </div>

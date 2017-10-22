@@ -100,7 +100,7 @@
 
 <body>
 	
-	<nav class="navbar navbar-default navbar-fixed-top" style=" margin-bottom: 40px;">
+	<nav class="navbar navbar-default navbar-fixed-top">
       <div class="container-fluid" >
         <div class="navbar-header">
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -131,13 +131,8 @@
 
     <div class="container-fluid">
       <div class="row">
-        <div class="col-sm-3 col-md-2 sidebar" style=" margin-top: 20px;">
-          <ul class="nav nav-sidebar">
-            <li class="active"><a href="#">Overview <span class="sr-only">(current)</span></a></li>
-            <li><a href="#" class="text-info">Reports</a></li>
-            <li><a href="#" class="text-info">Analytics</a></li>
-            <li><a href="#" class="text-info">Export</a></li>
-          </ul>
+        <div class="col-sm-3 col-md-2 sidebar" style=" margin-top: 55px;">
+          
 
           <div class="table-responsive">
             <table class="table table-striped">
@@ -168,26 +163,29 @@
               </tbody>
             </table>
             </div>
+            
+            <form class="navbar-form navbar-left" action="${pageContext.request.contextPath}/search" method="post" style=" margin-top: 5px;">           
+	                    
+		        		<button type="submit" class="btn btn-default" name="time_period" value="YEARLY">Yearly</button>
+		        		<button type="submit" class="btn btn-default" name="time_period" value="HALF_YEARLY" style=" margin-top: 5px;">Half Yearly</button>
+		       		<button type="submit" class="btn btn-default" name="time_period" value="QUARTERLY" style=" margin-top: 5px;">Quarterly</button>
+		        		<button type="submit" class="btn btn-default" name="time_period" value="MONTHLY" style=" margin-top: 5px;">Monthly</button>
+		        		<button type="submit" class="btn btn-default" name="time_period" value="WEEKLY" style=" margin-top: 5px;">Weekly</button>
+		         		
+		        		<input type=hidden name="company" value="${company}">
+	           		
+			</form>
+            
+            
         </div>
         <div class="col-sm-6 col-sm-offset-3 col-md-8 col-md-offset-1 main"  style=" margin-top: 40px;">
         
           <div class="jumbotron" style=" margin-top: 40px;">
           		<h2 style = "text-align: center;"><c:out value="${company} and ${companyCompare}: Closing Price" /></h2>
-   				 <div align="center" id="linechart_material" style="width: 550px; height: 400px; left: 0; right:0; margin: auto"></div>
+   				 <div align="center" id="linechart_material" style="width: 700px; height: 450px; left: 0; right:0; margin: auto"></div>
 
    				 
-                 <form class="navbar-form navbar-left" action="${pageContext.request.contextPath}/compare" method="post">           
-                      
-	            		<button type="submit" class="btn btn-default" name="time_period" value="YEARLY">Yearly</button>
-	            		<button type="submit" class="btn btn-default" name="time_period" value="HALF_YEARLY">Half Yearly</button>
-		            <button type="submit" class="btn btn-default" name="time_period" value="QUARTERLY">Quarterly</button>
-	            		<button type="submit" class="btn btn-default" name="time_period" value="MONTHLY">Monthly</button>
-	            		<button type="submit" class="btn btn-default" name="time_period" value="WEEKLY">Weekly</button>
-	            		
-	            		<input type=hidden name="company" value="${company}">
-    	            		<input type=hidden name="companyCompare" value="${companyCompare}">
-	            		
-          		</form>
+                 
 
 		  </div>
 	  

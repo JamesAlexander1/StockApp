@@ -175,7 +175,7 @@
 		            textStyle:{color: '#FFF'}
 		        },
 		        vAxis: {
-		            title: "Stock Price in $USD",
+		            title: "RSI value in $USD",
 		            titleTextStyle:{color: '#FFF'},
 		            textStyle:{color: '#FFF'},
 		            format: 'decimal'
@@ -220,7 +220,7 @@
    	            textStyle:{color: '#FFF'}
    	        },
    	        vAxis: {
-   	            title: "Stock Price in $USD",
+   	            title: "MACD indicators in $USD",
    	            titleTextStyle:{color: '#FFF'},
    	            textStyle:{color: '#FFF'},
    	            format: 'decimal'
@@ -241,7 +241,8 @@
    	   //Carousel js.
    	 	$(document).ready( function() {
    	 	    $('#myCarousel').carousel({
-   	 			interval:   4000
+   	 	   		pause: true,
+   	     		interval: false
    	 		});
    	 		
    	 		var clickEvent = false;
@@ -290,7 +291,7 @@
 
 <body>
 	
-	<nav class="navbar navbar-default navbar-fixed-top" style=" margin-bottom: 40px;">
+	<nav class="navbar navbar-default navbar-fixed-top">
       <div class="container-fluid" >
         <div class="navbar-header">
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -321,13 +322,8 @@
 
     <div class="container-fluid">
       <div class="row">
-        <div class="col-sm-3 col-md-2 sidebar" style=" margin-top: 20px;">
-          <ul class="nav nav-sidebar">
-            <li class="active"><a href="#">Overview <span class="sr-only">(current)</span></a></li>
-            <li><a href="#" class="text-info">Reports</a></li>
-            <li><a href="#" class="text-info">Analytics</a></li>
-            <li><a href="#" class="text-info">Export</a></li>
-          </ul>
+        <div class="col-sm-3 col-md-2 sidebar" style=" margin-top: 40px;">
+          
 
           <div class="table-responsive">
             <table class="table table-striped">
@@ -358,104 +354,129 @@
               </tbody>
             </table>
             </div>
+            
+            <form class="navbar-form navbar-left" action="${pageContext.request.contextPath}/search" method="post" style=" margin-top: 5px;">           
+	                    
+		        		<button type="submit" class="btn btn-default" name="time_period" value="YEARLY">Yearly</button>
+		        		<button type="submit" class="btn btn-default" name="time_period" value="HALF_YEARLY" style=" margin-top: 5px;">Half Yearly</button>
+		       		<button type="submit" class="btn btn-default" name="time_period" value="QUARTERLY" style=" margin-top: 5px;">Quarterly</button>
+		        		<button type="submit" class="btn btn-default" name="time_period" value="MONTHLY" style=" margin-top: 5px;">Monthly</button>
+		        		<button type="submit" class="btn btn-default" name="time_period" value="WEEKLY" style=" margin-top: 5px;">Weekly</button>
+		         		
+		        		<input type=hidden name="company" value="${company}">
+	           		
+			</form>
         </div>
-        <div class="col-sm-6 col-sm-offset-3 col-md-8 col-md-offset-1 main"  style=" margin-top: 40px;">
-        
-        	<!-- Testing  -->
-        	<div class="jumbotron" style=" margin-top: 40px;">
-        		<div class="container">
-			    <div id="myCarousel" class="carousel slide" data-ride="carousel">
-			    
-			      <!-- Wrapper for slides -->
-			      <div class="carousel-inner">
-			      
-			        <div class="item active">
-			          	
-		          			<h2 style = "text-align: center;"><c:out value="${company} : Closing Price" /></h2>
-		   					<div align="center" id="linechart_material" style="width: 700px; height: 500px; left: 0; right:0; margin: auto"></div>
-							  
+        <div class="col-sm-6 col-sm-offset-3 col-md-8 col-md-offset-1 main" style=" margin-top: 30px;">
+        		
+        		
+        		
 			
-					 
-					  
-			           
-			        </div><!-- End Item -->
-			 
-					<div class="item">
-			        		
-			            
-			          		<h2 style = "text-align: center;"><c:out value="${company} : SMA " /></h2>
-			   				<div align="center" id="sma_chart_graph" style="width: 700px; height: 500px; left: 0; right:0; margin: auto"></div>
-			                 
-			  		
-						
-			        </div><!-- End Item -->
-			        
-					<div class="item">
-					  	
-          						<h2 style = "text-align: center;"><c:out value="${company} : RSI " /></h2>
-   				 				<div align="center" id="rsi_chart_graph" style="width: 700px; height: 500px; left: 0; right:0; margin: auto"></div>
-				   		
-					   
+			
+	        	<!-- Jumbotron  -->
+	        	
+	        	<div class="jumbotron" style=" margin-top: 30px;">
+	        	
+	        		<!-- Comparison Form -->
+        		
+	        		<form class="navbar-form navbar-left" action="${pageContext.request.contextPath}/compare" method="post">
+	        		
+		            <input type="text" name="companyCompare" class="form-control" placeholder="Compare...">
+		            <input type=hidden name="company" value="${company}">
+		            <input type=hidden name="companyCompare" value="${companyCompare}">
+		            <button type="submit" class="btn btn-default">Compare</button>
+		            
+	        		</form>
+			 	
+			 	
+			 	<!-- Different Time Period Intervals for Data -->
+			 	<!-- 
+			 	<div class="bs-component">
+              <div class="list-group">
+                <a href="#" class="list-group-item active">
+                  Cras justo odio
+                </a>
+                <a href="#" class="list-group-item">Dapibus ac facilisis in
+                </a>
+                <a href="#" class="list-group-item">Morbi leo risus
+                </a>
+              </div>
+            <div id="source-button" class="btn btn-primary btn-xs" style="display: none;">&lt; &gt;</div></div> -->
+	        		<!--  -->
+	        		
+	        		
+        			<!-- Charts  -->
+	        		
+	        		<div class="container">
+	        		
+	        		
+				    <div id="myCarousel" class="carousel slide" data-ride="carousel" style=" margin-top: 20px;">
+				    
+				      <!-- Wrapper for slides -->
+				      <div class="carousel-inner">
+				      
+				        <div class="item active">
+				          	
+			          			
+			   					<div align="center" id="linechart_material" style="width: 700px; height: 450px; left: 0; right:0; margin: auto"></div>
+								  
+				
+						 
+						  
+				           
+				        </div><!-- End Item -->
+				 
+						<div class="item">
+				        		
+				            
+				          		
+				   				<div align="center" id="sma_chart_graph" style="width: 700px; height: 450px; left: 0; right:0; margin: auto"></div>
+				                 
+				  		
+							
+				        </div><!-- End Item -->
+				        
+						<div class="item">
+						  	
+	          						
+	   				 				<div align="center" id="rsi_chart_graph" style="width: 700px; height: 450px; left: 0; right:0; margin: auto"></div>
 					   		
-					</div><!-- End Item -->
-			        
-			        <div class="item">
-			          <!-- place graph here -->
-			           
-			           
-			           
-			          		<h2 style = "text-align: center;"><c:out value="${company} : MACD" /></h2>
-			   				<div align="center" id="macd_chart_graph" style="width: 700px; height: 500px; left: 0; right:0; margin: auto"></div>
-			                 
-					
-			           
-			        </div><!-- End Item -->
-			                
-			      </div><!-- End Carousel Inner -->
-			
-				<ul class="nav nav-pills nav-justified">
-			          <li data-target="#myCarousel" data-slide-to="0" class="active"><a href="#">Closing Price<small>Chart of Closing Price of Stock</small></a></li>
-			          <li data-target="#myCarousel" data-slide-to="1" ><a href="#">SMA<small>SMA Chart</small></a></li>
-			          <li data-target="#myCarousel" data-slide-to="2" ><a href="#">RSI<small>RSI Chart</small></a></li>
-			          <li data-target="#myCarousel" data-slide-to="3" ><a href="#">MACD<small>MACD Chart</small></a></li>
-		        </ul>
-			    	
-			
-			
-			    </div><!-- End Carousel -->
-			    </div>
-			    
-			    
-			    
-			
-        	</div>
-        	<!-- Testing  -->
-        	<form class="navbar-form navbar-left" action="${pageContext.request.contextPath}/compare" method="post">
-            <input type="text" name="companyCompare" class="form-control" placeholder="Compare...">
-            <input type=hidden name="company" value="${company}">
-            <input type=hidden name="companyCompare" value="${companyCompare}">
-            <button type="submit" class="btn btn-default">Compare</button>
-        </form>
- 				 
-        <form class="navbar-form navbar-left" action="${pageContext.request.contextPath}/search" method="post">           
-                    
-        		<button type="submit" class="btn btn-default" name="time_period" value="YEARLY">Yearly</button>
-        		<button type="submit" class="btn btn-default" name="time_period" value="HALF_YEARLY">Half Yearly</button>
-       		<button type="submit" class="btn btn-default" name="time_period" value="QUARTERLY">Quarterly</button>
-        		<button type="submit" class="btn btn-default" name="time_period" value="MONTHLY">Monthly</button>
-        		<button type="submit" class="btn btn-default" name="time_period" value="WEEKLY">Weekly</button>
-         		
-        		<input type=hidden name="company" value="${company}">
-           		
-		</form>
-         
-	  
-		  
-		  
-		  
-		   
-		
-
+						   
+						   		
+						</div><!-- End Item -->
+				        
+				        <div class="item">
+				          <!-- place graph here -->
+				           
+				           
+				           
+				          		
+				   				<div align="center" id="macd_chart_graph" style="width: 700px; height: 450px; left: 0; right:0; margin: auto"></div>
+				                 
+						
+				           
+				        </div><!-- End Item -->
+				                
+				      </div><!-- End Carousel Inner -->
+				
+					<ul class="nav nav-pills nav-justified">
+				          <li data-target="#myCarousel" data-slide-to="0" class="active"><a href="#">Closing Price<small>Chart of Closing Price of Stock</small></a></li>
+				          <li data-target="#myCarousel" data-slide-to="1" ><a href="#">SMA<small>SMA Chart</small></a></li>
+				          <li data-target="#myCarousel" data-slide-to="2" ><a href="#">RSI<small>RSI Chart</small></a></li>
+				          <li data-target="#myCarousel" data-slide-to="3" ><a href="#">MACD<small>MACD Chart</small></a></li>
+			        </ul>
+				    	
+				
+				
+				    </div><!-- End Carousel -->
+				    </div>
+				    
+				    
+				    
+				
+	        	</div>
+	        	<!-- End Jumbotron  -->
+ 
         </div>
       </div>
     </div>

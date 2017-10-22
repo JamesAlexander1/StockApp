@@ -6,7 +6,7 @@ import http.StringJsonURL;
 
 
 
-import json_parser.YearlyClosingPriceParser;
+
 import json_parser.smaDaily;
 
 import json_parser.smaWeek;
