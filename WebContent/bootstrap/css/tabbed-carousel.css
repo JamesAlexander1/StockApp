@@ -4,7 +4,7 @@ body { padding-top: 20px; }
     display:block;
 }
 #myCarousel .nav {
-	background:#eee;
+	background:#303030;
 }
 #myCarousel .nav a {
     border-radius:0px;

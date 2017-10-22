@@ -52,146 +52,146 @@
      */
     
     function drawChart() {
-      var dataYearly = new google.visualization.DataTable();
-      
-     
-     	dataYearly.addColumn('date', 'Date');
+	    var dataYearly = new google.visualization.DataTable();
+	    
+	   
+	   	dataYearly.addColumn('date', 'Date');
 		dataYearly.addColumn('number', 'Price');
-     	<c:forEach items="${yearly_list}" varStatus="element">
-			dataYearly.addRow([new Date(<c:out value="${yearly_list[element.index].year}"/> ,<c:out value="${yearly_list[element.index].month}"/>, <c:out value="${yearly_list[element.index].day}"/> ), <c:out value="${yearly_list[element.index].price}"/>]);
-	 	</c:forEach>
-   
-      
-      
-      var optionsYearly = {
-              title: 'Stock Price Performance',
-              //curveType: 'function',
-              legend: { position: 'bottom' },
-              backgroundColor: '#303030',
-              legendTextStyle: { color: '#FFF' },
-              titleTextStyle: { color: '#FFF' },
-              hAxis: {
-                  title: "Date",
-                  titleTextStyle:{color: '#FFF'},
-                  textStyle:{color: '#FFF'}
-              },
-              vAxis: {
-                  title: "Stock Price in $USD",
-                  titleTextStyle:{color: '#FFF'},
-                  textStyle:{color: '#FFF'},
-                  format: 'decimal'
-                 
-                  
-              },
-              opacity: 0.8,
-              series: {
-                  
-                  0: { color: '#3BB9FF' },
-                  1: { color: '#6CC417' }
-              }
-          };
-
-     
-     
-     var chartYearly = new google.charts.Line(document.getElementById('linechart_material'));
-     chartYearly.draw(dataYearly, google.charts.Line.convertOptions(optionsYearly));
-     
+	   	<c:forEach items="${yearly_list}" varStatus="element">
+		dataYearly.addRow([new Date(<c:out value="${yearly_list[element.index].year}"/> ,<c:out value="${yearly_list[element.index].month}"/>, <c:out value="${yearly_list[element.index].day}"/> ), <c:out value="${yearly_list[element.index].price}"/>]);
+		</c:forEach>
+	 
+	    
+	    
+	    var optionsYearly = {
+	            title: 'Stock Price Performance',
+	            //curveType: 'function',
+	            legend: { position: 'bottom' },
+	            backgroundColor: '#303030',
+	            legendTextStyle: { color: '#FFF' },
+	            titleTextStyle: { color: '#FFF' },
+	            hAxis: {
+	                title: "Date",
+	                titleTextStyle:{color: '#FFF'},
+	                textStyle:{color: '#FFF'}
+	            },
+	            vAxis: {
+	                title: "Stock Price in $USD",
+	                titleTextStyle:{color: '#FFF'},
+	                textStyle:{color: '#FFF'},
+	                format: 'decimal'
+	               
+	                
+	            },
+	            opacity: 0.8,
+	            series: {
+	                
+	                0: { color: '#3BB9FF' },
+	                1: { color: '#6CC417' }
+	            }
+	        };
+	
+	   
+	   
+	   var chartYearly = new google.charts.Line(document.getElementById('linechart_material'));
+	   chartYearly.draw(dataYearly, google.charts.Line.convertOptions(optionsYearly));
+	   
+    }
      //sma chart
+     function drawSma(){
+	     var smaChart = new google.visualization.DataTable();
+	      
+	     
+	     
+	    		smaChart.addColumn('date', 'Date');
+	     	
+	       	smaChart.addColumn('number', 'SMA');
+	       	
+	     	<c:forEach items="${sma_chart}" varStatus="element">
+	   			smaChart.addRow([new Date(<c:out value="${sma_chart[element.index].year}"/> ,<c:out value="${sma_chart[element.index].month}"/>, 
+	   			<c:out value="${sma_chart[element.index].day}"/> ), <c:out value="${sma_chart[element.index].price}"/>]);
+	   			
+	   	 	</c:forEach>
+	    
+	      
+	      
+	      var smaOptions = {
+	              title: 'Stock Price Performance',
+	              //curveType: 'function',
+	              legend: { position: 'bottom' },
+	              backgroundColor: '#303030',
+	              legendTextStyle: { color: '#FFF' },
+	              titleTextStyle: { color: '#FFF' },
+	              hAxis: {
+	                  title: "Date",
+	                  titleTextStyle:{color: '#FFF'},
+	                  textStyle:{color: '#FFF'}
+	              },
+	              vAxis: {
+	                  title: "SMA value in $USD",
+	                  titleTextStyle:{color: '#FFF'},
+	                  textStyle:{color: '#FFF'},
+	                  format: 'decimal'
+	                 
+	                  
+	              },
+	              opacity: 0.8,
+	              series: {
+	                  
+	          	  	  0: { color: '#3BB9FF' },
+	                  1: { color: '#6CC417' }
+	                  
+	              }
+	          };
+	
+	     
+	     
+	     var smaChartDraw = new google.charts.Line(document.getElementById('sma_chart_graph'));
+	     smaChartDraw.draw(smaChart, google.charts.Line.convertOptions(smaOptions));
      
-     var smaChart = new google.visualization.DataTable();
-      
      
+    }
      
-    		smaChart.addColumn('date', 'Date');
-     	
-       	smaChart.addColumn('number', 'SMA');
-       	
-     	<c:forEach items="${sma_chart}" varStatus="element">
-   			smaChart.addRow([new Date(<c:out value="${sma_chart[element.index].year}"/> ,<c:out value="${sma_chart[element.index].month}"/>, 
-   			<c:out value="${sma_chart[element.index].day}"/> ), <c:out value="${sma_chart[element.index].price}"/>]);
-   			
-   	 	</c:forEach>
-    
-      
-      
-      var smaOptions = {
-              title: 'Stock Price Performance',
-              //curveType: 'function',
-              legend: { position: 'bottom' },
-              backgroundColor: '#303030',
-              legendTextStyle: { color: '#FFF' },
-              titleTextStyle: { color: '#FFF' },
-              hAxis: {
-                  title: "Date",
-                  titleTextStyle:{color: '#FFF'},
-                  textStyle:{color: '#FFF'}
-              },
-              vAxis: {
-                  title: "SMA value in $USD",
-                  titleTextStyle:{color: '#FFF'},
-                  textStyle:{color: '#FFF'},
-                  format: 'decimal'
-                 
-                  
-              },
-              opacity: 0.8,
-              series: {
-                  
-          	  	  0: { color: '#3BB9FF' },
-                  1: { color: '#6CC417' }
-                  
-              }
-          };
-
-     
-     
-     var smaChartDraw = new google.charts.Line(document.getElementById('sma_chart_graph'));
-     smaChartDraw.draw(smaChart, google.charts.Line.convertOptions(smaOptions));
-     
-     //
-     
+    // 
+    function drawRsi() {
      //rsi chart
-     var rsiChart = new google.visualization.DataTable();
-		rsiChart.addColumn('date', 'Date');
-		rsiChart.addColumn('number', 'RSI');
-	<c:forEach items="${rsi_chart}" varStatus="element">
-		rsiChart.addRow([new Date(<c:out value="${rsi_chart[element.index].year}"/> ,<c:out value="${rsi_chart[element.index].month}"/>, <c:out value="${rsi_chart[element.index].day}"/> ), <c:out value="${rsi_chart[element.index].price}"/>]);
-	</c:forEach>
-
-	var rsiOptions = {
-	        title: 'RSI Chart',
-	        //curveType: 'function',
-	        legend: { position: 'bottom' },
-	        backgroundColor: '#303030',
-	        legendTextStyle: { color: '#FFF' },
-	        titleTextStyle: { color: '#FFF' },
-	        hAxis: {
-	            title: "Date",
-	            titleTextStyle:{color: '#FFF'},
-	            textStyle:{color: '#FFF'}
-	        },
-	        vAxis: {
-	            title: "Stock Price in $USD",
-	            titleTextStyle:{color: '#FFF'},
-	            textStyle:{color: '#FFF'},
-	            format: 'decimal'
-	           
-	            
-	        },
-	        opacity: 0.8,
-	        series: {
-	            
-	            0: { color: '#3BB9FF' },
-	            1: { color: '#6CC417' }
-	        }
-	    };
+	     var rsiChart = new google.visualization.DataTable();
+			rsiChart.addColumn('date', 'Date');
+			rsiChart.addColumn('number', 'RSI');
+		<c:forEach items="${rsi_chart}" varStatus="element">
+			rsiChart.addRow([new Date(<c:out value="${rsi_chart[element.index].year}"/> ,<c:out value="${rsi_chart[element.index].month}"/>, <c:out value="${rsi_chart[element.index].day}"/> ), <c:out value="${rsi_chart[element.index].price}"/>]);
+		</c:forEach>
 	
+		var rsiOptions = {
+		        title: 'RSI Chart',
+		        //curveType: 'function',
+		        legend: { position: 'bottom' },
+		        backgroundColor: '#303030',
+		        legendTextStyle: { color: '#FFF' },
+		        titleTextStyle: { color: '#FFF' },
+		        hAxis: {
+		            title: "Date",
+		            titleTextStyle:{color: '#FFF'},
+		            textStyle:{color: '#FFF'}
+		        },
+		        vAxis: {
+		            title: "Stock Price in $USD",
+		            titleTextStyle:{color: '#FFF'},
+		            textStyle:{color: '#FFF'},
+		            format: 'decimal'
+		           
+		            
+		        },
+		        opacity: 0.8,
+		        series: {
+		            
+		            0: { color: '#3BB9FF' },
+		            1: { color: '#6CC417' }
+		        }
+		    };
 	
-	
-	var rsiChartDraw = new google.charts.Line(document.getElementById('rsi_chart_graph'));
-	rsiChartDraw.draw(rsiChart, google.charts.Line.convertOptions(rsiOptions));
-	
-
+		var rsiChartDraw = new google.charts.Line(document.getElementById('rsi_chart_graph'));
+		rsiChartDraw.draw(rsiChart, google.charts.Line.convertOptions(rsiOptions));
     
     }
     
@@ -203,11 +203,11 @@
    		macdChart.addColumn('number', 'MACD HIST');
    		macdChart.addColumn('number', 'MACD SIGNAL');
 
-   	<c:forEach items="${macd_chart}" varStatus="element">
-   		macdChart.addRow([new Date(<c:out value="${macd_chart[element.index].year}"/> ,<c:out value="${macd_chart[element.index].month}"/>, <c:out value="${macd_chart[element.index].day}"/> ), <c:out value="${macd_chart[element.index].macdPrice}"/>, <c:out value="${macd_chart[element.index].macdHistPrice}"/>, <c:out value="${macd_chart[element.index].macdSignalPrice}"/>]);
-   	</c:forEach>
+   		<c:forEach items="${macd_chart}" varStatus="element">
+   			macdChart.addRow([new Date(<c:out value="${macd_chart[element.index].year}"/> ,<c:out value="${macd_chart[element.index].month}"/>, <c:out value="${macd_chart[element.index].day}"/> ), <c:out value="${macd_chart[element.index].macdPrice}"/>, <c:out value="${macd_chart[element.index].macdHistPrice}"/>, <c:out value="${macd_chart[element.index].macdSignalPrice}"/>]);
+   		</c:forEach>
 
-   	var macdOptions = {
+   		var macdOptions = {
    	        title: 'MACD Chart',
    	        //curveType: 'function',
    	        legend: { position: 'bottom' },
@@ -234,8 +234,8 @@
    	
    	
    	
-   	var macdChartDraw = new google.visualization.ComboChart(document.getElementById('macd_chart_graph'));
-   	macdChartDraw.draw(macdChart, google.charts.Line.convertOptions(macdOptions));
+   		var macdChartDraw = new google.visualization.ComboChart(document.getElementById('macd_chart_graph'));
+   		macdChartDraw.draw(macdChart, google.charts.Line.convertOptions(macdOptions));
     }
     
    	   //Carousel js.
@@ -249,19 +249,37 @@
    	 				clickEvent = true;
    	 				$('.nav li').removeClass('active');
    	 				$(this).parent().addClass('active');		
+   	 				
    	 		}).on('slid.bs.carousel', function(e) {
+   	 			
+   	 			var current = $('.nav li.active');
+   	 			var id = parseInt(current.data('slide-to'));
    	 			if(!clickEvent) {
    	 				var count = $('.nav').children().length -1;
-   	 				var current = $('.nav li.active');
+   	 				
    	 				current.removeClass('active').next().addClass('active');
-   	 				var id = parseInt(current.data('slide-to'));
+   	 				//var id = parseInt(current.data('slide-to'));
    	 				if(count == id) {
    	 					$('.nav li').first().addClass('active');	
    	 				}
+   	 				
+   	 				
    	 			}
    	 			clickEvent = false;
-   	 			drawChart();
-   	 			drawVisualization();
+   	 			if(id == 0){
+					drawChart();
+				}else if(id == 1){
+					drawSma();
+				}else if(id == 2){
+					drawRsi();
+				}else{
+					drawVisualization();
+				}
+   	 			//var current = $('.nav li.active');
+   	 			//drawChart();
+   	 			//drawVisualization();
+   	 			//drawRsi()
+   	 			//drawSma();
    	 			
    	 		});
    	 	});
@@ -344,7 +362,7 @@
         <div class="col-sm-6 col-sm-offset-3 col-md-8 col-md-offset-1 main"  style=" margin-top: 40px;">
         
         	<!-- Testing  -->
-        	<div class="jumbotron" style=" margin-top: 40px; width: 1000px; height: 800px;">
+        	<div class="jumbotron" style=" margin-top: 40px;">
         		<div class="container">
 			    <div id="myCarousel" class="carousel slide" data-ride="carousel">
 			    
