@@ -19,8 +19,6 @@ import factory.dao.IDAOFactory;
 
 import model.DateClosingPricePoint;
 
-
-
 import model.NumeratedTimePeriods;
 
 

@@ -3,6 +3,10 @@ package factory.dao;
 import dao.DataAndPriceDAO;
 import dao.MACDChartDAO;
 
+
+import model.macdDateClosingPrice;
+
+
 import model.macdDateClosingPrice;
 
 

@@ -10,6 +10,7 @@ import model.DatePricePoint;
 import model.NumeratedTimePeriods;
 
 
+
 import model.DateClosingPricePoint;
 import model.macdDateClosingPrice;
 
@@ -28,8 +29,7 @@ public class MACDChartDAO implements DataAndPriceDAO<macdDateClosingPrice>{
     public MACDChartDAO(String time) {
     		timePeriod = time;
     }
-    
-
+ 
     public  ArrayList<DatePricePoint<macdDateClosingPrice>> queryData(String companyCode) {
         
     		if (timePeriod.equals(NumeratedTimePeriods.YEARLY.name()) || timePeriod.equals(NumeratedTimePeriods.HALF_YEARLY.name())) {

@@ -33,7 +33,9 @@ import factory.dao.IndicatorDAOFactory;
 import factory.dao.MacdDAOFactory;
 import model.DateClosingPricePoint;
 
+
 import model.macdDateClosingPrice;
+
 
 import model.NumeratedTimePeriods;
 
@@ -53,7 +55,6 @@ public class SearchController extends HttpServlet{
     private DataAndPriceDAO<DateClosingPricePoint> dao = null;
     private DataAndPriceDAO<DateClosingPricePoint> rsiDao = null;
     private DataAndPriceDAO<DateClosingPricePoint> smaDao = null;
-
     private DataAndPriceDAO<macdDateClosingPrice> macdDao = null;
 
     
